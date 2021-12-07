@@ -34,13 +34,28 @@
                 <a href="" class="navigation-tap">Profile</a>
             </nav>
         </section>
-
-
     </header>
 
-    <body>
+    <main>
+        <section id="top-search-section">
 
-    </body>
+            <form id="search-location-form">
+                <input placeholder="Enter city here" type="text" id="search-location-input">
+                <button type="submit" id="submit-location-button">Search</button>
+            </form>
+
+            <form id="order-by-form">
+                <label id="order-by-label" for="order-by-input">Order by:</label>
+                <select name="order-by-input" id="order-by-input">
+                    <option value="rating">Rating</option>
+                    <option value="price">Price</option>
+                    <option value="distance">Distance</option>
+                </select>
+            </form>
+
+        </section>
+    </main>
+
     <footer>
 
     </footer>
