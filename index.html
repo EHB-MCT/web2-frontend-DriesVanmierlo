@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link href="./images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <title>Kapsamazing</title>
 </head>
 
@@ -52,8 +53,46 @@
                     <option value="distance">Distance</option>
                 </select>
             </form>
-
         </section>
+        <div id="filter-and-datalist">
+            <section id="filter-form-section">
+                <form id="filter-type-form">
+                    <h3 id="filter-type-form-title">Type</h3>
+                    <div class="filter-option">
+                        <input type="checkbox" id="filter-kebab" name="filter-kebab" value="kebab">
+                        <label for="filter-kebab">kebab</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="filter-chicken" name="filter-chicken" value="chicken">
+                        <label for="filter-chicken">chicken</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="filter-shoarma" name="filter-shoarma" value="shoarma">
+                        <label for="filter-shoarma">shoarma</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="filter-mix" name="filter-mix" value="mix">
+                        <label for="filter-mix">mix</label>
+                    </div>
+                </form>
+                <form id="filter-options-form">
+                    <h3 id="filter-options-form-title">Options</h3>
+                    <div class="options-option">
+                        <input type="checkbox" id="options-pickup" name="options-pickup" value="pickup">
+                        <label for="options-pickup">pickup</label>
+                    </div>
+                    <div class="options-option">
+                        <input type="checkbox" id="options-delivery" name="options-delivery" value="delivery">
+                        <label for="options-delivery">delivery</label>
+                    </div>
+                </form>
+            </section>
+            <section id="datalist">
+                <article class="datalist-kapsalon-article">
+
+                </article>
+            </section>
+        </div>
     </main>
 
     <footer>

@@ -87,13 +87,20 @@
 }
 
 /********************/
-/***     BODY     ***/
+/***     MAIN     ***/
 /********************/
+
+main {
+    width: 85%;
+    margin: auto;
+}
+
+/***TOP SEARCH SECTION***/
 
 #top-search-section {
     display: flex;
     justify-content: space-between;
-    width: 85%;
+    width: 100%;
     margin: auto;
     align-items: center;
 }
@@ -123,6 +130,17 @@
     background-color: var(--red);
     font-weight: 600;
     padding: 5px 10px;
+}
+
+/***FILTER SECTION***/
+
+#filter-type-form, #filter-options-form {
+    margin-top: 25px;
+}
+
+#filter-type-form-title, #filter-options-form-title {
+    color: var(--red);
+    padding-bottom: 15px;
 }
 
 
