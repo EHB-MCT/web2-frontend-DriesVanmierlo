@@ -206,8 +206,80 @@ main {
 
 #filter-type-form-title,
 #filter-options-form-title {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
     color: var(--red);
     padding-bottom: 15px;
+}
+
+.filter-option,
+.options-option {
+    color: var(--brown);
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    padding-left: 1%;
+    align-items: center;
+}
+
+.filter-label-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px;
+    margin-bottom: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filter-label-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: var(--white);
+    border: 1px solid var(--red);
+}
+
+.filter-label-container:hover input~.checkmark {
+    background-color: var(--lightred);
+}
+
+.filter-label-container input:checked~.checkmark {
+    background-color: var(--red);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.filter-label-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.filter-label-container .checkmark:after {
+    left: 4px;
+    top: -1px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--beige);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 
