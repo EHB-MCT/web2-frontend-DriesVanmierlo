@@ -26,16 +26,60 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-pencil:before {
+    content: "\e905";
+}
+
 .icon-location:before {
     content: "\e947";
+}
+
+.icon-bin:before {
+    content: "\e9ac";
+}
+
+.icon-bookmark:before {
+    content: "\e9d2";
 }
 
 .icon-star-empty:before {
     content: "\e9d7";
 }
 
+.icon-star-half:before {
+    content: "\e9d8";
+}
+
 .icon-star-full:before {
     content: "\e9d9";
+}
+
+.icon-heart:before {
+    content: "\e9da";
+}
+
+.icon-plus:before {
+    content: "\ea0a";
+}
+
+.icon-minus:before {
+    content: "\ea0b";
+}
+
+.icon-arrow-right2:before {
+    content: "\ea3c";
+}
+
+.icon-arrow-left2:before {
+    content: "\ea40";
+}
+
+.icon-circle-right:before {
+    content: "\ea42";
+}
+
+.icon-circle-down:before {
+    content: "\ea43";
 }
 
 .icon-facebook:before {
@@ -366,6 +410,10 @@ main {
     cursor: pointer;
 }
 
+.kapsalon-article-a {
+    text-decoration: none;
+}
+
 .kapsalon-article-figure {
     width: 15%;
 }
@@ -446,6 +494,143 @@ main {
     color: var(--brown);
     font-weight: 800;
     font-size: 1.2em;
+}
+
+/**********************************/
+/***     MORE INFO KAPSALON     ***/
+/**********************************/
+
+#go-back-button {
+    text-align: center;
+    width: 75px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-arrow-left {
+    width: 75px;
+    background-color: var(--red);
+    color: var(--beige);
+    padding: 5px 50px;
+    font-size: 2.5em;
+}
+
+/***     INFO SECTION     ***/
+
+#kapsalon-info-section {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    margin-top: 25px;
+}
+
+#kapsalon-info-figure {
+    width: 400px;
+    height: 400px;
+}
+
+#kapsalon-info-img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+#kapsalon-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    padding-left: 25px;
+}
+
+#kapsalon-info-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#kapsalon-info-header-title {
+    color: var(--brown);
+    font-size: 1.75em;
+    font-weight: 800;
+}
+
+#kapsalon-info-header-restaurant {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#info-header-restaurant-name {
+    color: var(--brown);
+    padding-right: 25px;
+    font-size: 1.2em;
+}
+
+#info-header-restaurant-distance {
+    color: var(--red);
+    font-size: 1.2em;
+}
+
+
+#kapsalon-info-header-rating {
+    display: flex;
+    margin-top: 7px;
+    font-size: 1.2em;
+}
+
+#kapsalon-info-scores-title {
+    color: var(--red);
+    font-size: 1.3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+#info-scores-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#info-scores-toppic div {
+    color: var(--brown);
+    text-align: right;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#info-scores-number div {
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#info-scores-stars div {
+    margin-bottom: 5px;
+}
+
+#kapsalon-info-order {
+    display: flex;
+    align-items: center;
+}
+
+#kapsalon-info-order a {
+    text-decoration: none;
+    width: 75px;
+    background-color: var(--red);
+    color: var(--beige);
+    padding: 5px 50px;
+    font-size: 1.2em;
+    font-weight: 800;
+    text-align: center;
+}
+
+#kapsalon-info-order div {
+    font-size: 1.5em;
+    margin-left: 25px;
+    color: var(--brown);
+    font-weight: 800;
 }
 
 
