@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link href="./images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;700;900&display=swap" rel="stylesheet">
     <title>Kapsamazing</title>
 </head>
 
@@ -28,8 +32,8 @@
                 <h2>Find the best kapsalon in the city!</h2>
             </div>
         </section>
-        <section id="main-navigation">
-            <nav>
+        <section id="main-navigation-section">
+            <nav id="main-navigation-nav">
                 <a href="#" class="navigation-tap">Home</a>
                 <a href="" class="navigation-tap">Code</a>
                 <a href="" class="navigation-tap">Profile</a>
@@ -41,12 +45,12 @@
         <section id="top-search-section">
 
             <form id="search-location-form">
-                <input placeholder="Enter city here" type="text" id="search-location-input">
+                <input placeholder="Enter city or restaurant" type="text" id="search-location-input">
                 <button type="submit" id="submit-location-button">Search</button>
             </form>
 
             <form id="order-by-form">
-                <label id="order-by-label" for="order-by-input">Order by:</label>
+                <label id="order-by-label" for="order-by-input">Sort on</label>
                 <select name="order-by-input" id="order-by-input">
                     <option value="rating">Rating</option>
                     <option value="price">Price</option>
