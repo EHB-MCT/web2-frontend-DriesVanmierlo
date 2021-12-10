@@ -42,15 +42,46 @@
     </header>
 
     <main>
-        <section id="insert-code-container">
-            <h3 id="insert-code-title">Register new kapsalon</h3>
-            <form id="insert-code-form">
-                <input id="insert-code-input" type="text" placeholder="Code">
-                <button id="insert-code-button" type="submit"><a id="insert-code-a" href="./rate.html">Register</a></button>
+        <div id="rate-header">
+            <a href="./code.html" class="go-back-button">
+                <div class="icon-arrow-left2 edit-arrow-left"></div>
+            </a>
+            <h3 id="rate-title">Rate "Kapsalon kebab" from "Rana Kebab"</h3>
+        </div>
+        <section id="rate-container">
+            <figure class="kapsalon-info-figure">
+                <img class="kapsalon-info-img" src="./images/example-kapsalon-1.jpg" alt="">
+            </figure>
+            <form id="rate-form">
+                <h4 id="rate-form-title">Scores</h4>
+                <div class="slidecontainer">
+                    <label for="">Fries</label>
+                    <input type="range" min="1" max="10" value="8" class="slider" id="range-fries"
+                        onchange="updateScore(this.value, this.id);">
+                    <div>
+                        <div id="range-fries-score">4</div>
+                        <div>/10</div>
+                    </div>
+                </div>
+                <div class="slidecontainer">
+                    <label for="">Meat</label>
+                    <input type="range" min="1" max="10" value="8" class="slider" id="range-meat"
+                        onchange="updateScore(this.value, this.id);">
+                    <div>
+                        <div id="range-meat-score">4</div>
+                        <div>/10</div>
+                    </div>
+                </div>
+                <div class="slidecontainer">
+                    <label for="">Toppings</label>
+                    <input type="range" min="1" max="10" value="8" class="slider" id="range-toppings"
+                        onchange="updateScore(this.value, this.id);">
+                    <div>
+                        <div id="range-toppings-score">4</div>
+                        <div>/10</div>
+                    </div>
+                </div>
             </form>
-            <p id="code-explination-text">
-                Fill in the code of your meal to rate your kapsalon!
-            </p>
         </section>
     </main>
 
@@ -68,6 +99,11 @@
             </div>
         </div>
     </footer>
+    <script>
+        function updateScore(val, name) {
+            document.getElementById(`${name}-score`).innerHTML = val / 2;
+        }
+    </script>
 </body>
 
 </html>

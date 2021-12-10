@@ -506,7 +506,7 @@ main {
 /***     MORE INFO KAPSALON     ***/
 /**********************************/
 
-#go-back-button {
+.go-back-button {
     text-align: center;
     width: 75px;
     border: none;
@@ -531,12 +531,12 @@ main {
     margin-top: 25px;
 }
 
-#kapsalon-info-figure {
+.kapsalon-info-figure {
     width: 300px;
     height: 300px;
 }
 
-#kapsalon-info-img {
+.kapsalon-info-img {
     width: 300px;
     height: 300px;
     object-fit: cover;
@@ -716,6 +716,11 @@ main {
     color: var(--lightbrown);
 }
 
+#insert-code-a {
+    text-decoration: none;
+    color: var(--beige);
+}
+
 #code-explination-text {
     width: 60%;
     margin: auto;
@@ -723,6 +728,73 @@ main {
     color: var(--brown);
     text-align: left;
     margin-top: 5px;
+}
+
+/*************************/
+/***     RATE PAGE     ***/
+/*************************/
+
+#rate-header {
+    width: 100%;
+    top: -75px;
+}
+
+#rate-title {
+    position: relative;
+    top: -30px;
+    text-align: center;
+    font-size: 1.5em;
+    color: var(--brown);
+}
+
+#rate-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+}
+
+#rate-form {
+    padding-left: 25px;
+    width: 100%;
+}
+
+#rate-form-title {
+    color: var(--red);
+    font-size: 1.5em;
+}
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: var(--lightred);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--brown);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--brown);
+    cursor: pointer;
 }
 
 /**********************/
