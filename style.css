@@ -104,6 +104,12 @@
     font-family: 'Lato', sans-serif;
 }
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 :root {
     --red: #ff3333;
     --lightred: #ff9999;
@@ -512,7 +518,7 @@ main {
     width: 75px;
     background-color: var(--red);
     color: var(--beige);
-    padding: 5px 50px;
+    padding: 0px 40px;
     font-size: 2.5em;
 }
 
@@ -526,13 +532,13 @@ main {
 }
 
 #kapsalon-info-figure {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
 }
 
 #kapsalon-info-img {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     object-position: center;
 }
@@ -633,6 +639,91 @@ main {
     font-weight: 800;
 }
 
+/***     OTHER MEALS     ***/
+
+#other-meals-section {
+    display: flex;
+    width: 90%;
+    margin-left: auto;
+    margin-top: 50px;
+}
+
+#map {
+    width: 300px;
+    height: 300px;
+}
+
+#other-meals-container {
+    padding-left: 25px;
+    width: 100%;
+}
+
+#other-meals-title {
+    color: var(--red);
+    font-size: 1.4em;
+    font-weight: 800;
+}
+
+#other-meals-datalist {
+    margin-top: 25px;
+}
+
+/********************************/
+/***     INSERT CODE PAGE     ***/
+/********************************/
+
+#insert-code-container {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: -75px;
+}
+
+#insert-code-title {
+    color: var(--brown);
+    font-size: 1.5em;
+}
+
+#insert-code-form {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+#insert-code-input {
+    width: 75%;
+    border: 1px solid var(--brown);
+    height: 40px;
+    font-weight: 400;
+    font-size: 1.25em;
+    padding-left: 20px;
+    color: var(--brown);
+}
+
+#insert-code-button {
+    width: 20%;
+    background-color: var(--red);
+    border: none;
+    color: var(--beige);
+    font-size: 1.25em;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#insert-code-input::placeholder {
+    color: var(--lightbrown);
+}
+
+#code-explination-text {
+    width: 60%;
+    margin: auto;
+    font-size: 0.8em;
+    color: var(--brown);
+    text-align: left;
+    margin-top: 5px;
+}
 
 /**********************/
 /***     FOOTER     ***/
@@ -643,6 +734,8 @@ main {
     width: 100%;
     background-color: var(--red);
     padding-bottom: 40px;
+    z-index: -1;
+    margin-top: auto;
 }
 
 #footer-skew-top {

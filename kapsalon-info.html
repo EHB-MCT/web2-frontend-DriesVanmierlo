@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;700;900&display=swap" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
     <title>Kapsamazing</title>
 </head>
 
@@ -34,8 +36,8 @@
         </section>
         <section id="main-navigation-section">
             <nav id="main-navigation-nav">
-                <a href="#" class="navigation-tap">Home</a>
-                <a href="" class="navigation-tap">Code</a>
+                <a href="./index.html" class="navigation-tap">Home</a>
+                <a href="./code.html" class="navigation-tap">Code</a>
                 <a href="" class="navigation-tap">Profile</a>
             </nav>
         </section>
@@ -65,7 +67,7 @@
                         <span class="icon-star-full edit-star-icon"></span>
                         <span class="icon-star-full edit-star-icon"></span>
                         <span class="icon-star-full edit-star-icon"></span>
-                        <span class="icon-star-empty edit-star-icon"></span>
+                        <span class="icon-star-half edit-star-icon"></span>
                     </div>
                 </div>
                 <div id="kapsalon-info-scores">
@@ -86,12 +88,12 @@
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-empty edit-star-icon"></span></div>
+                                <span class="icon-star-half edit-star-icon"></span></div>
                             <div><span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-empty edit-star-icon"></span></div>
+                                <span class="icon-star-half edit-star-icon"></span></div>
                             <div><span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
@@ -104,6 +106,96 @@
                     <a href="#">Order</a>
                     <div>€8,00</div>
                 </div>
+            </div>
+        </section>
+
+        <section id="other-meals-section">
+            <div id="map-container">
+                <div id='map'></div>
+            </div>
+            <div id="other-meals-container">
+                <h4 id="other-meals-title">Other meals from Rana Kebab</h4>
+                <section id="other-meals-datalist">
+                    
+                    <a class="kapsalon-article-a" href="./kapsalon-info.html">
+                        <article class="datalist-kapsalon-article">
+                            <figure class="kapsalon-article-figure">
+                                <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                            </figure>
+                            <div class="kapsalon-article-info">
+                                <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                                <div class="kapsalon-article-restaurant">
+                                    <span class="icon-location edit-location-icon"></span>
+                                    <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                    <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                                </div>
+                            </div>
+                            <div class="kapsalon-article-moreinfo">
+                                <div class="kapsalon-article-rating">
+                                    <div class="kapsalon-article-rating-number">4,4/5</div>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-empty edit-star-icon"></span>
+                                </div>
+                                <div class="kapsalon-article-price">€8,00</div>
+                            </div>
+                        </article>
+                    </a>
+                    <a class="kapsalon-article-a" href="./kapsalon-info.html">
+                        <article class="datalist-kapsalon-article">
+                            <figure class="kapsalon-article-figure">
+                                <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                            </figure>
+                            <div class="kapsalon-article-info">
+                                <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                                <div class="kapsalon-article-restaurant">
+                                    <span class="icon-location edit-location-icon"></span>
+                                    <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                    <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                                </div>
+                            </div>
+                            <div class="kapsalon-article-moreinfo">
+                                <div class="kapsalon-article-rating">
+                                    <div class="kapsalon-article-rating-number">4,4/5</div>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-empty edit-star-icon"></span>
+                                </div>
+                                <div class="kapsalon-article-price">€8,00</div>
+                            </div>
+                        </article>
+                    </a>
+                    <a class="kapsalon-article-a" href="./kapsalon-info.html">
+                        <article class="datalist-kapsalon-article">
+                            <figure class="kapsalon-article-figure">
+                                <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                            </figure>
+                            <div class="kapsalon-article-info">
+                                <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                                <div class="kapsalon-article-restaurant">
+                                    <span class="icon-location edit-location-icon"></span>
+                                    <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                    <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                                </div>
+                            </div>
+                            <div class="kapsalon-article-moreinfo">
+                                <div class="kapsalon-article-rating">
+                                    <div class="kapsalon-article-rating-number">4,4/5</div>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-full edit-star-icon"></span>
+                                    <span class="icon-star-empty edit-star-icon"></span>
+                                </div>
+                                <div class="kapsalon-article-price">€8,00</div>
+                            </div>
+                        </article>
+                    </a>
+                </section>
             </div>
         </section>
 
@@ -123,6 +215,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZHJpZXN2YW5taWVybG8iLCJhIjoiY2t1anBwbmFpMG0zdTJwbzZoM2R3cWltZSJ9.8-JHlbflqXHGMJ2z-JAM2Q';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/driesvanmierlo/ckuvq484l1m8s17p5ll8moyrj/draft'
+        });
+    </script>
 </body>
 
 </html>
