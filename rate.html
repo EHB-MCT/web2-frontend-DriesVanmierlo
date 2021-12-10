@@ -54,33 +54,44 @@
             </figure>
             <form id="rate-form">
                 <h4 id="rate-form-title">Scores</h4>
-                <div class="slidecontainer">
-                    <label for="">Fries</label>
-                    <input type="range" min="1" max="10" value="8" class="slider" id="range-fries"
-                        onchange="updateScore(this.value, this.id);">
-                    <div>
-                        <div id="range-fries-score">4</div>
-                        <div>/10</div>
+                <div>
+                    <div class="slidecontainer">
+                        <label class="range-label" for="">Fries</label>
+                        <input type="range" min="1" max="10" value="8" class="slider" id="range-fries"
+                            onchange="updateScore(this.value, this.id);">
+                        <div class="range-scores">
+                            <div id="range-fries-score">4/5</div>
+                        </div>
+                    </div>
+                    <div class="slidecontainer">
+                        <label class="range-label" for="">Meat</label>
+                        <input type="range" min="1" max="10" value="8" class="slider" id="range-meat"
+                            onchange="updateScore(this.value, this.id);">
+                        <div class="range-scores">
+                            <div id="range-meat-score">4/5</div>
+                        </div>
+                    </div>
+                    <div class="slidecontainer">
+                        <label class="range-label" for="">Toppings</label>
+                        <input type="range" min="1" max="10" value="8" class="slider" id="range-toppings"
+                            onchange="updateScore(this.value, this.id);">
+                        <div class="range-scores">
+                            <div id="range-toppings-score">4/5</div>
+                        </div>
                     </div>
                 </div>
-                <div class="slidecontainer">
-                    <label for="">Meat</label>
-                    <input type="range" min="1" max="10" value="8" class="slider" id="range-meat"
-                        onchange="updateScore(this.value, this.id);">
+                <div id="rate-overall">
+                    <h5 id="rate-overall-text">Overall score</h5>
+                    <div id="rate-overall-score">4/5</div>
                     <div>
-                        <div id="range-meat-score">4</div>
-                        <div>/10</div>
+                        <span class="icon-star-full edit-star-icon"></span>
+                        <span class="icon-star-full edit-star-icon"></span>
+                        <span class="icon-star-full edit-star-icon"></span>
+                        <span class="icon-star-full edit-star-icon"></span>
+                        <span class="icon-star-empty edit-star-icon"></span>
                     </div>
                 </div>
-                <div class="slidecontainer">
-                    <label for="">Toppings</label>
-                    <input type="range" min="1" max="10" value="8" class="slider" id="range-toppings"
-                        onchange="updateScore(this.value, this.id);">
-                    <div>
-                        <div id="range-toppings-score">4</div>
-                        <div>/10</div>
-                    </div>
-                </div>
+                <button id="rate-overall-button" type="submit">Submit</button>
             </form>
         </section>
     </main>
@@ -101,7 +112,7 @@
     </footer>
     <script>
         function updateScore(val, name) {
-            document.getElementById(`${name}-score`).innerHTML = val / 2;
+            document.getElementById(`${name}-score`).innerHTML = val / 2 + "/5";
         }
     </script>
 </body>

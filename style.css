@@ -646,6 +646,7 @@ main {
     width: 90%;
     margin-left: auto;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #map {
@@ -751,11 +752,15 @@ main {
     width: 80%;
     margin: auto;
     display: flex;
+    margin-bottom: 50px;
 }
 
 #rate-form {
     padding-left: 25px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #rate-form-title {
@@ -765,6 +770,8 @@ main {
 
 .slidecontainer {
     width: 100%;
+    margin-bottom: 25px;
+    align-items: center;
 }
 
 .slider {
@@ -774,7 +781,6 @@ main {
     border-radius: 5px;
     background: var(--lightred);
     outline: none;
-    opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
@@ -794,6 +800,58 @@ main {
     height: 25px;
     border-radius: 50%;
     background: var(--brown);
+    cursor: pointer;
+}
+
+.slidecontainer input {
+    width: 50%;
+}
+
+.slidecontainer .range-label {
+    width: 20%;
+    text-align: right;
+    padding-right: 25px;
+    display: inline-block;
+    color: var(--brown);
+    font-weight: 600;
+}
+
+.range-scores {
+    width: 20%;
+    display: inline-block;
+    padding-left: 25px;
+    color: var(--brown);
+    font-weight: 800;
+}
+
+#rate-overall {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+#rate-overall-text {
+    color: var(--brown);
+    font-size: 1.2em;
+    font-weight: 800;
+    padding-right: 25px;
+}
+
+#rate-overall-score {
+    font-size: 1.5em;
+    color: var(--brown);
+    font-weight: 800;
+    padding-right: 15px;
+}
+
+#rate-overall-button {
+    width: 175px;
+    color: var(--beige);
+    background-color: var(--red);
+    font-size: 1.25em;
+    font-weight: 800;
+    border: none;
+    padding: 5px;
     cursor: pointer;
 }
 
