@@ -855,6 +855,59 @@ main {
     cursor: pointer;
 }
 
+/***********************/
+/***     PROFILE     ***/
+/***********************/
+
+#main-profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-info-section {
+    width: 25%;
+}
+
+#profile-info-article {
+    background-color: var(--red);
+    color: var(--beige);
+    padding: 10px;
+    padding-top: 5px;
+    margin-bottom: 25px;
+}
+
+#profile-info-article h3 {
+    font-size: 2em;
+    font-weight: 800;
+}
+
+#profile-stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-stat-names div,
+#profile-stat-numbers div {
+    margin-top: 3px;
+}
+
+#profile-fact-article {
+    background-color: var(--lightred);
+    color: var(--beige);
+    padding: 10px;
+    padding-top: 5px;
+}
+
+#profile-fact-article h3 {
+    font-size: 1.4em;
+    font-weight: 800;
+}
+
+#profile-fact-article p {
+    margin-top: 3px;
+}
+
+
 /**********************/
 /***     FOOTER     ***/
 /**********************/
