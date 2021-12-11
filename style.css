@@ -907,6 +907,45 @@ main {
     margin-top: 3px;
 }
 
+#profile-lists-section {
+    width: 65%;
+}
+
+
+.profile-list-section {
+    padding-bottom: 25px;
+}
+
+.profile-list-section > h4 {
+    color: var(--red);
+    font-size: 1.3em;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.kapsalon-article-date {
+    color: var(--lightbrown);
+    font-size: 0.8em;
+    margin-top: 3px;
+}
+
+.kapsalon-article-order-number,
+.edit-bin-icon {
+    display: flex;
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--brown);
+    color: var(--beige);
+    justify-self: center;
+    padding: 0px 5px;
+    font-size: 1.4em;
+    font-weight: 800;
+}
+
+.edit-bin-icon {
+    font-weight: 100;
+}
 
 /**********************/
 /***     FOOTER     ***/
