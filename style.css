@@ -872,7 +872,8 @@ main {
     margin-bottom: 25px;
 }
 
-.register-input {
+.register-input,
+.login-input {
     color: var(--brown);
     width: 72%;
     margin-bottom: 10px;
@@ -880,7 +881,8 @@ main {
     padding: 5px;
 }
 
-.register-input::placeholder {
+.register-input::placeholder,
+.login-input::placeholder {
     color: var(--lightbrown);
 }
 
@@ -900,7 +902,8 @@ main {
     margin-left: 5px;
 }
 
-#register-button {
+#register-button,
+#login-button {
     position: relative;
     justify-content: center;
     display: flex;
@@ -912,6 +915,16 @@ main {
     padding: 5px 0px;
     margin-left: auto;
     top: -20px;
+}
+
+#login-button {
+    top: 0;
+}
+
+#login-main {
+    position: relative;
+    display: flex;
+    top: -50px;
 }
 
 /***********************/
