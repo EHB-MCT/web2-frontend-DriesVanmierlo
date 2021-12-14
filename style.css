@@ -227,6 +227,12 @@ body {
     border-bottom: 4px solid var(--red);
 }
 
+#main-navigation-section .checked-nav {
+    color: var(--red);
+    border-top: 4px solid var(--red);
+    border-bottom: 4px solid var(--red);
+}
+
 /********************/
 /***     MAIN     ***/
 /********************/
