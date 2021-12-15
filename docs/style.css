@@ -1,10 +1,10 @@
 @font-face {
     font-family: "icomoon";
-    src: url("../fonts/icomoon.eot");
-    src: url("../fonts/icomoon.eot?cf9qnt#iefix") format("embedded-opentype"),
-        url("../fonts/icomoon.ttf?cf9qnt") format("truetype"),
-        url("../fonts/icomoon.woff?cf9qnt") format("woff"),
-        url("../fonts/icomoon.svg?cf9qnt#icomoon") format("svg");
+    src: url("./fonts/icomoon.eot");
+    src: url("./fonts/icomoon.eot?cf9qnt#iefix") format("embedded-opentype"),
+        url("./fonts/icomoon.ttf?cf9qnt") format("truetype"),
+        url("./fonts/icomoon.woff?cf9qnt") format("woff"),
+        url("./fonts/icomoon.svg?cf9qnt#icomoon") format("svg");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -409,8 +409,13 @@ main {
 
 /***KAPSALON DATALIST***/
 
-#kapsalon-datalist {
+#kapsalon-datalist,
+#kapsalon-admin-list {
     width: 70%;
+}
+
+#kapsalon-admin-list {
+    margin: auto;
 }
 
 .datalist-kapsalon-article {
@@ -870,7 +875,8 @@ main {
     margin: auto;
 }
 
-#register-section h3 {
+#register-section h3,
+#admin-title {
     color: var(--brown);
     font-size: 1.3em;
     font-weight: 800;
