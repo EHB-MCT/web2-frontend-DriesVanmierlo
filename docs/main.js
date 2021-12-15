@@ -15,7 +15,7 @@
   \***********************/
 /***/ (() => {
 
-eval("window.onload(console.log(\"loaded\"))\n\n//# sourceURL=webpack://web2-frontend-driesvanmierlo/./src/script.js?");
+eval("let kapsalonsList;\r\n\r\nwindow.onload = async function () {\r\n    console.log(\"Loaded\")\r\n    await loadKapsalonsHomepage();\r\n\r\n    async function loadKapsalonsHomepage() {\r\n        console.log(\"start data fetch\")\r\n        await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')\r\n            .then(response => {\r\n                return response.json();\r\n            })\r\n            .then(data => {\r\n                console.log(data);\r\n            })\r\n    }\r\n}\n\n//# sourceURL=webpack://web2-frontend-driesvanmierlo/./src/script.js?");
 
 /***/ })
 
