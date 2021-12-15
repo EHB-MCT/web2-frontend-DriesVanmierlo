@@ -1,7 +1,9 @@
 let kapsalonsList;
 
 window.onload = async function () {
+    
     console.log("Loaded")
+
     await loadKapsalonsHomepage();
 
     async function loadKapsalonsHomepage() {
