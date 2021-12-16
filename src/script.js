@@ -182,8 +182,12 @@ window.onload = async function () {
 
                 allRatings.push(newRating);
 
+                let newGeneralRating = calculateGeneralScoreNumber(kapsalonInfo.ratings);
+                console.log(newGeneralRating);
+
                 const kap = {
-                    "ratings": allRatings
+                    "ratings": allRatings,
+                    "latestGeneralRating": newGeneralRating
                 }
 
                 console.log("kap: ", kap);
@@ -348,6 +352,27 @@ function calculateGeneralScore(ratings) {
             stars += `${starEmpty}`;
         }
         return `no score yet </div>${stars}`;
+    }
+}
+
+function calculateGeneralScoreNumber(ratings) {
+    if (ratings.length > 0) {
+
+        let generalScore = 0;
+        let numberRatings = 0;
+
+        ratings.forEach(e => {
+            generalScore += e.fries + e.meat + e.toppings;
+            numberRatings += 1;
+        })
+
+        generalScore = Math.round((generalScore / (numberRatings * 3) + Number.EPSILON) * 10) / 10;
+
+        return generalScore;
+        //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+
+    } else {
+        return `no score yet`;
     }
 }
 
