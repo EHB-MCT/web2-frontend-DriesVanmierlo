@@ -40,7 +40,11 @@ window.onload = async function () {
             document.getElementById('filter-type-form').addEventListener('change', e => {
                 e.preventDefault();
                 console.log("CHANGE!");
-                updateList(kapsalonList);
+                if (document.getElementById('search-location-input').value != "") {
+                    updateLocation(kapsalonList);
+                } else {
+                    updateList(kapsalonList);
+                }
             })
         }
 
@@ -296,7 +300,7 @@ function updateLocation(kapsalonList) {
     //Source: https://flexiple.com/javascript-capitalize-first-letter/
 
     kapsalonList.forEach(e => {
-        if (city == e.city) {
+        if (city == e.city || city == e.restaurant) {
             newList.push(e);
         }
     })
