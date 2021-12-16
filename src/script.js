@@ -1,3 +1,5 @@
+const stringify = require("fast-json-stable-stringify");
+
 window.onload = async function () {
 
     console.log("Loaded")
@@ -36,12 +38,7 @@ window.onload = async function () {
                     </div>
                     <div class="kapsalon-article-moreinfo">
                         <div class="kapsalon-article-rating">
-                            <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}</div>
-                            <span class="icon-star-full edit-star-icon"></span>
-                            <span class="icon-star-full edit-star-icon"></span>
-                            <span class="icon-star-full edit-star-icon"></span>
-                            <span class="icon-star-full edit-star-icon"></span>
-                            <span class="icon-star-empty edit-star-icon"></span>
+                            <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}
                         </div>
                         <div class="kapsalon-article-price">€${e.price}</div>
                     </div>
@@ -95,12 +92,7 @@ window.onload = async function () {
                         </div>
                     </div>
                     <div id="kapsalon-info-header-rating">
-                        <div class="kapsalon-article-rating-number">${calculateGeneralScore(kapsalonInfo.ratings)}</div>
-                        <span class="icon-star-full edit-star-icon"></span>
-                        <span class="icon-star-full edit-star-icon"></span>
-                        <span class="icon-star-full edit-star-icon"></span>
-                        <span class="icon-star-full edit-star-icon"></span>
-                        <span class="icon-star-half edit-star-icon"></span>
+                        <div class="kapsalon-article-rating-number">${calculateGeneralScore(kapsalonInfo.ratings)}
                     </div>
                 </div>
                 <div id="kapsalon-info-scores">
@@ -160,11 +152,63 @@ function calculateGeneralScore(ratings) {
             numberRatings += 1;
         })
 
-        return `${Math.round((generalScore / (numberRatings * 3) + Number.EPSILON) * 10) / 10}/5 <div class="lightbrown">(${numberRatings})</div>`;
+        generalScore = Math.round((generalScore / (numberRatings * 3) + Number.EPSILON) * 10) / 10;
+
+        let stars = "";
+        let starEmpty = `<span class="icon-star-empty edit-star-icon"></span>`;
+        let starHalf = `<span class="icon-star-half edit-star-icon"></span>`;
+        let starFull = `<span class="icon-star-full edit-star-icon"></span>`;
+
+        if (generalScore > 4.5) {
+            for (let i = 0; i < 5; i++) {
+                stars += `${starFull}`;
+            }
+        } else if (generalScore > 3.5) {
+            for (let i = 0; i < 4; i++) {
+                stars += `${starFull}`;
+            }
+            stars += `${starEmpty}`;
+        } else if (generalScore > 2.5) {
+            for (let i = 0; i < 3; i++) {
+                stars += `${starFull}`;
+            }
+            for (let i = 0; i < 2; i++) {
+                stars += `${starEmpty}`;
+            }
+        } else if (generalScore > 1.5) {
+            for (let i = 0; i < 2; i++) {
+                stars += `${starFull}`;
+            }
+            for (let i = 0; i < 3; i++) {
+                stars += `${starEmpty}`;
+            }
+        } else if (generalScore > 0.5) {
+            for (let i = 0; i < 1; i++) {
+                stars += `${starFull}`;
+            }
+            for (let i = 0; i < 4; i++) {
+                stars += `${starEmpty}`;
+            }
+        } else {
+            for (let i = 0; i < 5; i++) {
+                stars += `${starEmpty}`;
+            }
+        }
+
+
+        console.log(stars);
+        return `${generalScore}/5 <div class="lightbrown">(${numberRatings})</div></div>${stars}`;
         //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 
     } else {
-        return `no score yet`;
+
+        let stars = "";
+        let starEmpty = `<span class="icon-star-empty edit-star-icon"></span>`;
+
+        for (let i = 0; i < 5; i++) {
+            stars += `${starEmpty}`;
+        }
+        return `no score yet </div>${stars}`;
     }
 }
 
