@@ -1,5 +1,7 @@
 const stringify = require("fast-json-stable-stringify");
-const { CompatSource } = require("webpack-sources");
+const {
+    CompatSource
+} = require("webpack-sources");
 
 window.onload = async function () {
 
@@ -198,12 +200,43 @@ window.onload = async function () {
                 ratingMeat = parseInt(ratingMeat) / 2;
                 ratingToppings = parseInt(ratingToppings) / 2;
 
-                console.log(ratingFries, ratingMeat, ratingToppings);
+                let allRatings = [];
+
+                kapsalonInfo.ratings.forEach(e => {
+                    allRatings.push(e);
+                })
+
+                let newRating = {
+                    "fries": ratingFries,
+                    "meat": ratingMeat,
+                    "toppings": ratingToppings
+                }
+
+                allRatings.push(newRating);
 
                 const kap = {
-                    ratings: [
-                    ]
+                    "ratings": allRatings
                 }
+
+                console.log("kap: ", kap);
+
+                fetch(`https://web2-kapsamazing-driesv.herokuapp.com/rateKapsalon/${localStorage.kapsalonId}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(kap)
+                    })
+                    .then(res => {
+                        res.json()
+                    })
+                    .then(data => {
+                        console.log(data);
+                        if (data == undefined) {
+                            alert("Thank you for your rating! Kapsalon-lovers will thank you!");
+                            window.location.href = './index.html';
+                        }
+                    });
 
             })
 
