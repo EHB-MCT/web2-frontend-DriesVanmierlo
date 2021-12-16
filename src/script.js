@@ -15,7 +15,6 @@ window.onload = async function () {
     async function loadKapsalonsHomepage() {
 
         let kapsalonList = [];
-        let kapsalonListHomepageHTML;
 
         await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
             .then(response => {
@@ -23,45 +22,14 @@ window.onload = async function () {
             })
             .then(data => {
                 kapsalonList = data;
+                renderKapsalonList(kapsalonList);
             })
 
-        kapsalonList.forEach(e => {
-            kapsalonListHomepageHTML += `
-                <a class="kapsalon-article-a" href="./kapsalon-info.html">
-                <article class="datalist-kapsalon-article" id="${e._id}">
-                    <figure class="kapsalon-article-figure">
-                        <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
-                    </figure>
-                    <div class="kapsalon-article-info">
-                        <h4 class="kapsalon-article-title">${e.name}</h4>
-                        <div class="kapsalon-article-restaurant">
-                            <span class="icon-location edit-location-icon"></span>
-                            <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
-                            <div class="kapsalon-article-restaurant-distance">0,7 km</div>
-                        </div>
-                    </div>
-                    <div class="kapsalon-article-moreinfo">
-                        <div class="kapsalon-article-rating">
-                            <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}
-                        </div>
-                        <div class="kapsalon-article-price">€${e.price}</div>
-                    </div>
-                </article>
-            </a>
-                `
-        });
-
-        if (document.getElementById('kapsalon-datalist')) {
-            document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
-            document.getElementById('kapsalon-datalist').addEventListener('click', e => {
-                console.log("click on data list", e);
-
-                const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
-                console.log(kapsalonId, e.target);
-
-                if (kapsalonId) {
-                    localStorage.setItem("kapsalonId", kapsalonId);
-                }
+        if (document.getElementById('filter-type-form')) {
+            document.getElementById('filter-type-form').addEventListener('change', e => {
+                e.preventDefault();
+                console.log("CHANGE!");
+                updateList(kapsalonList);
             })
         }
     }
@@ -252,6 +220,67 @@ window.onload = async function () {
 }
 
 //General functions
+
+function renderKapsalonList(kapsalonList) {
+    let kapsalonListHomepageHTML;
+    kapsalonList.forEach(e => {
+        kapsalonListHomepageHTML += `
+            <a class="kapsalon-article-a" href="./kapsalon-info.html">
+            <article class="datalist-kapsalon-article" id="${e._id}">
+                <figure class="kapsalon-article-figure">
+                    <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                </figure>
+                <div class="kapsalon-article-info">
+                    <h4 class="kapsalon-article-title">${e.name}</h4>
+                    <div class="kapsalon-article-restaurant">
+                        <span class="icon-location edit-location-icon"></span>
+                        <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
+                        <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                    </div>
+                </div>
+                <div class="kapsalon-article-moreinfo">
+                    <div class="kapsalon-article-rating">
+                        <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}
+                    </div>
+                    <div class="kapsalon-article-price">€${e.price}</div>
+                </div>
+            </article>
+        </a>
+            `
+    });
+
+    if (document.getElementById('kapsalon-datalist')) {
+        document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
+        document.getElementById('kapsalon-datalist').addEventListener('click', e => {
+            console.log("click on data list", e);
+
+            const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
+            console.log(kapsalonId, e.target);
+
+            if (kapsalonId) {
+                localStorage.setItem("kapsalonId", kapsalonId);
+            }
+        })
+    }
+}
+
+function updateList(kapsalonList) {
+    let newList = [];
+
+    let kapsalons = document.querySelectorAll("#filter-type-form input[type='checkbox']");
+
+    kapsalons.forEach(e => {
+        if (e.checked == true) {
+
+            kapsalonList.forEach(el => {
+                if (e.name == el.type) {
+                    newList.push(el);
+                }
+            })
+        }
+    })
+    renderKapsalonList(newList);
+}
 
 function calculateGeneralScore(ratings) {
     if (ratings.length > 0) {
