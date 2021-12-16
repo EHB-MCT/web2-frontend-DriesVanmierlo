@@ -95,7 +95,7 @@ window.onload = async function () {
                         </div>
                     </div>
                     <div id="kapsalon-info-header-rating">
-                        <div class="kapsalon-article-rating-number">4,4/5</div>
+                        <div class="kapsalon-article-rating-number">${calculateGeneralScore(kapsalonInfo.ratings)}</div>
                         <span class="icon-star-full edit-star-icon"></span>
                         <span class="icon-star-full edit-star-icon"></span>
                         <span class="icon-star-full edit-star-icon"></span>
@@ -112,9 +112,9 @@ window.onload = async function () {
                             <div>Toppings</div>
                         </div>
                         <div id="info-scores-number">
-                            <div>4,8/5</div>
-                            <div>4,4/5</div>
-                            <div>4,0/5</div>
+                            <div>${calculateIngredientScore("fries", kapsalonInfo.ratings)}</div>
+                            <div>${calculateIngredientScore("meat", kapsalonInfo.ratings)}</div>
+                            <div>${calculateIngredientScore("toppings", kapsalonInfo.ratings)}</div>
                         </div>
                         <div id="info-scores-stars">
                             <div><span class="icon-star-full edit-star-icon"></span>
@@ -164,6 +164,29 @@ function calculateGeneralScore(ratings) {
         //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 
     } else {
-        return `No score yet`;
+        return `no score yet`;
     }
+}
+
+function calculateIngredientScore(ingredient, ratings) {
+    console.log(ingredient, ratings)
+    if (ratings.length > 0) {
+        let ingredientScore = 0;
+        let numberRatings = 0;
+        ratings.forEach(e => {
+            if (ingredient == "fries") {
+                ingredientScore += e.fries;
+            } else if (ingredient == "meat") {
+                ingredientScore += e.meat;
+            } else {
+                ingredientScore += e.toppings;
+            }
+            numberRatings += 1;
+        })
+
+        return `${Math.round((ingredientScore / numberRatings + Number.EPSILON) * 10) / 10}/5`
+    } else {
+        return `?/5`
+    }
+
 }
