@@ -22,7 +22,7 @@ window.onload = async function () {
             })
             .then(data => {
                 kapsalonList = data;
-                sortKapsalons(kapsalonList);
+                sortKapsalons(kapsalonList, "rating");
                 renderKapsalonList(kapsalonList);
             })
 
@@ -30,6 +30,14 @@ window.onload = async function () {
             document.getElementById('filter-type-form').addEventListener('change', e => {
                 e.preventDefault();
                 console.log("CHANGE!");
+                updateList(kapsalonList);
+            })
+        }
+
+        if (document.getElementById('order-by-form')) {
+            document.getElementById('order-by-form').addEventListener('change', e => {
+                e.preventDefault();
+                console.log("ORDER!")
                 updateList(kapsalonList);
             })
         }
@@ -273,6 +281,7 @@ function updateList(kapsalonList) {
     let newList = [];
 
     let kapsalons = document.querySelectorAll("#filter-type-form input[type='checkbox']");
+    let orderBy = document.getElementById('order-by-input').value;
 
     kapsalons.forEach(e => {
         if (e.checked == true) {
@@ -284,15 +293,22 @@ function updateList(kapsalonList) {
             })
         }
     })
-    sortKapsalons(newList)
+    sortKapsalons(newList, orderBy)
     renderKapsalonList(newList);
 }
 
-function sortKapsalons(kapsalonList) {
-    kapsalonList.sort((a, b) => {
-        return b["latestGeneralRating"] - a["latestGeneralRating"];
-    })
+function sortKapsalons(kapsalonList, orderBy) {
 
+
+    if (orderBy == "rating") {
+        kapsalonList.sort((a, b) => {
+            return b["latestGeneralRating"] - a["latestGeneralRating"];
+        })
+    } else {
+        kapsalonList.sort((a, b) => {
+            return a["price"] - b["price"];
+        })
+    }
 }
 
 function calculateGeneralScore(ratings) {
