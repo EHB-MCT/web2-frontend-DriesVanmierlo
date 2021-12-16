@@ -22,6 +22,7 @@ window.onload = async function () {
             })
             .then(data => {
                 kapsalonList = data;
+                sortKapsalons(kapsalonList);
                 renderKapsalonList(kapsalonList);
             })
 
@@ -283,7 +284,15 @@ function updateList(kapsalonList) {
             })
         }
     })
+    sortKapsalons(newList)
     renderKapsalonList(newList);
+}
+
+function sortKapsalons(kapsalonList) {
+    kapsalonList.sort((a, b) => {
+        return b["latestGeneralRating"] - a["latestGeneralRating"];
+    })
+
 }
 
 function calculateGeneralScore(ratings) {
