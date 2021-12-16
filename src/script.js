@@ -26,6 +26,16 @@ window.onload = async function () {
                 renderKapsalonList(kapsalonList);
             })
 
+        if (document.getElementById('search-location-form')) {
+            document.getElementById('search-location-form').addEventListener('submit', e => {
+                e.preventDefault();
+                console.log("LOCATION!");
+                if (document.getElementById('search-location-input').value != "") {
+                    updateLocation(kapsalonList);
+                }
+            })
+        }
+
         if (document.getElementById('filter-type-form')) {
             document.getElementById('filter-type-form').addEventListener('change', e => {
                 e.preventDefault();
@@ -275,6 +285,23 @@ function renderKapsalonList(kapsalonList) {
             }
         })
     }
+}
+
+function updateLocation(kapsalonList) {
+    let newList = [];
+
+    let city = document.getElementById('search-location-input').value;
+
+    city = city.charAt(0).toUpperCase() + city.slice(1);
+    //Source: https://flexiple.com/javascript-capitalize-first-letter/
+
+    kapsalonList.forEach(e => {
+        if (city == e.city) {
+            newList.push(e);
+        }
+    })
+
+    updateList(newList);
 }
 
 function updateList(kapsalonList) {
