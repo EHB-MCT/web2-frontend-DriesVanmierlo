@@ -6,6 +6,7 @@ window.onload = async function () {
 
     await loadKapsalonsHomepage();
     await loadKapsalonInfo();
+    await validateCode();
 
     async function loadKapsalonsHomepage() {
 
@@ -139,7 +140,32 @@ window.onload = async function () {
                 `
         }
     }
+
+    async function validateCode() {
+        if (document.getElementById('insert-code-form')) {
+
+            let kapid;
+            let kapsalonInfo;
+
+            document.getElementById('insert-code-form').addEventListener('submit', e => {
+                e.preventDefault('submit');
+                kapid = document.getElementById('insert-code-input').value;
+                console.log(kapid);
+
+                fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/?id=${kapid}`)
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        kapsalonInfo = data;
+                    })
+            })
+        }
+    }
 }
+
+//General functions
 
 function calculateGeneralScore(ratings) {
     if (ratings.length > 0) {
@@ -195,7 +221,6 @@ function calculateGeneralScore(ratings) {
             }
         }
 
-
         console.log(stars);
         return `${generalScore}/5 <div class="lightbrown">(${numberRatings})</div></div>${stars}`;
         //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
@@ -232,5 +257,4 @@ function calculateIngredientScore(ingredient, ratings) {
     } else {
         return `?/5`
     }
-
 }
