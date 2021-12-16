@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="main.js"></script>
     <title>Kapsamazing</title>
 </head>
 
@@ -43,10 +44,7 @@
 
     <main>
         <div id="rate-header">
-            <a href="./code.html" class="go-back-button">
-                <div class="icon-arrow-left2 edit-arrow-left"></div>
-            </a>
-            <h3 id="rate-title">Rate "Kapsalon kebab" from "Rana Kebab"</h3>
+            <h3 id="rate-title"></h3>
         </div>
         <section id="rate-container">
             <figure class="kapsalon-info-figure">
@@ -57,7 +55,7 @@
                 <div>
                     <div class="slidecontainer">
                         <label class="range-label" for="">Fries</label>
-                        <input type="range" min="1" max="10" value="8" class="slider" id="range-fries"
+                        <input type="range" min="0" max="10" value="8" class="slider" id="range-fries"
                             onchange="updateScore(this.value, this.id);">
                         <div class="range-scores">
                             <div id="range-fries-score">4/5</div>
@@ -65,7 +63,7 @@
                     </div>
                     <div class="slidecontainer">
                         <label class="range-label" for="">Meat</label>
-                        <input type="range" min="1" max="10" value="8" class="slider" id="range-meat"
+                        <input type="range" min="0" max="10" value="8" class="slider" id="range-meat"
                             onchange="updateScore(this.value, this.id);">
                         <div class="range-scores">
                             <div id="range-meat-score">4/5</div>
@@ -73,7 +71,7 @@
                     </div>
                     <div class="slidecontainer">
                         <label class="range-label" for="">Toppings</label>
-                        <input type="range" min="1" max="10" value="8" class="slider" id="range-toppings"
+                        <input type="range" min="0" max="10" value="8" class="slider" id="range-toppings"
                             onchange="updateScore(this.value, this.id);">
                         <div class="range-scores">
                             <div id="range-toppings-score">4/5</div>

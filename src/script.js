@@ -1,4 +1,5 @@
 const stringify = require("fast-json-stable-stringify");
+const { CompatSource } = require("webpack-sources");
 
 window.onload = async function () {
 
@@ -7,6 +8,7 @@ window.onload = async function () {
     await loadKapsalonsHomepage();
     await loadKapsalonInfo();
     await validateCode();
+    await rateKapsalon();
 
     async function loadKapsalonsHomepage() {
 
@@ -18,7 +20,6 @@ window.onload = async function () {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 kapsalonList = data;
             })
 
@@ -64,7 +65,6 @@ window.onload = async function () {
     }
 
     async function loadKapsalonInfo() {
-        console.log("LOAD ONE KAPSALON");
 
         let kapsalonInfo;
 
@@ -145,7 +145,7 @@ window.onload = async function () {
         if (document.getElementById('insert-code-form')) {
 
             let kapid;
-            let kapsalonInfo;
+            let kapsalonId;
 
             document.getElementById('insert-code-form').addEventListener('submit', e => {
                 e.preventDefault('submit');
@@ -158,10 +158,63 @@ window.onload = async function () {
                     })
                     .then(data => {
                         console.log(data);
-                        kapsalonInfo = data;
+                        kapsalonId = data._id;
+
+                        localStorage.setItem("kapsalonId", kapsalonId);
+
+                        window.location.href = './rate.html'
+                    })
+                    .catch(error => {
+                        alert("This is not a valid code, please try another combination");
                     })
             })
         }
+    }
+
+    async function rateKapsalon() {
+        let kapsalonInfo;
+
+        await fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/${localStorage.kapsalonId}`)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                kapsalonInfo = data;
+            })
+
+        if (document.getElementById('rate-form')) {
+            console.log("Start rating");
+
+            document.getElementById("rate-title").innerHTML = `Rate "${kapsalonInfo.name}" from "${kapsalonInfo.restaurant}"`;
+
+            document.getElementById('rate-form').addEventListener('submit', e => {
+                e.preventDefault();
+
+                let ratingFries = document.getElementById('range-fries').value;
+                let ratingMeat = document.getElementById('range-meat').value;
+                let ratingToppings = document.getElementById('range-toppings').value;
+
+                ratingFries = parseInt(ratingFries) / 2;
+                ratingMeat = parseInt(ratingMeat) / 2;
+                ratingToppings = parseInt(ratingToppings) / 2;
+
+                console.log(ratingFries, ratingMeat, ratingToppings);
+
+                const kap = {
+                    ratings: [
+                    ]
+                }
+
+            })
+
+        }
+
+        document.getElementById('rate-form').addEventListener('change', e => {
+            console.log("Change");
+
+            document.getElementById('rate-overall-score').innerHTML = updateGeneralRating();
+        });
+
     }
 }
 
@@ -221,7 +274,6 @@ function calculateGeneralScore(ratings) {
             }
         }
 
-        console.log(stars);
         return `${generalScore}/5 <div class="lightbrown">(${numberRatings})</div></div>${stars}`;
         //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 
@@ -257,4 +309,15 @@ function calculateIngredientScore(ingredient, ratings) {
     } else {
         return `?/5`
     }
+}
+
+function updateGeneralRating() {
+    let ratingFries = document.getElementById('range-fries').value;
+    let ratingMeat = document.getElementById('range-meat').value;
+    let ratingToppings = document.getElementById('range-toppings').value;
+
+    let generalRating = 0;
+    generalRating = parseInt(ratingFries) + parseInt(ratingMeat) + parseInt(ratingToppings);
+
+    return `${Math.round((generalRating / 6 + Number.EPSILON) * 10) / 10}/5`;
 }
