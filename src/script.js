@@ -36,7 +36,7 @@ window.onload = async function () {
                     </div>
                     <div class="kapsalon-article-moreinfo">
                         <div class="kapsalon-article-rating">
-                            <div class="kapsalon-article-rating-number">4,4/5</div>
+                            <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}</div>
                             <span class="icon-star-full edit-star-icon"></span>
                             <span class="icon-star-full edit-star-icon"></span>
                             <span class="icon-star-full edit-star-icon"></span>
@@ -146,5 +146,24 @@ window.onload = async function () {
                 Other meals from ${kapsalonInfo.restaurant}
                 `
         }
+    }
+}
+
+function calculateGeneralScore(ratings) {
+    if (ratings.length > 0) {
+
+        let generalScore = 0;
+        let numberRatings = 0;
+
+        ratings.forEach(e => {
+            generalScore += e.fries + e.meat + e.toppings;
+            numberRatings += 1;
+        })
+
+        return `${Math.round((generalScore / (numberRatings * 3) + Number.EPSILON) * 10) / 10}/5 <div class="lightbrown">(${numberRatings})</div>`;
+        //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+
+    } else {
+        return `No score yet`;
     }
 }
