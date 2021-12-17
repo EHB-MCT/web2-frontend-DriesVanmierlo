@@ -101,7 +101,7 @@
                             <input required placeholder="E.g. https://..." type="text" name="kapsalon-image"
                                 id="kapsalon-image">
                         </div>
-                        <a id="kew-kapsalon-image-button" target="_blank" href="https://nl.imgbb.com/">Image link
+                        <a class="new-kapsalon-image-button" target="_blank" href="https://nl.imgbb.com/">Image link
                             site</a>
                     </div>
                     <div class="new-kapsalon-input">
@@ -109,15 +109,18 @@
                         <input required placeholder="E.g. https://..." type="text" name="kapsalon-link"
                             id="kapsalon-link">
                     </div>
-                    <div class="new-kapsalon-input">
-                        <label for="kapsalon-mapbox-token">Mapbox token:</label>
-                        <input required placeholder="E.g. pk. ..." type="text" name="kapsalon-mapbox-token"
-                            id="kapsalon-mapbox-token">
-                    </div>
-                    <div class="new-kapsalon-input">
-                        <label for="kapsalon-mapbox-style">Mapbox Style:</label>
-                        <input required placeholder="E.g. mapbox.//..." type="text" name="kapsalon-mapbox-style"
-                            id="kapsalon-mapbox-style">
+                    <div class="new-kapsalon-triple-input">
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-latitude">Latitude:</label>
+                            <input required placeholder="E.g. 50.875356" type="text" name="kapsalon-latitude"
+                                id="kapsalon-latitude">
+                        </div>
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-longitude">Longitude:</label>
+                            <input required placeholder="E.g. 4.65415" type="text" name="kapsalon-longitude"
+                                id="kapsalon-longitude">
+                        </div>
+                        <a class="new-kapsalon-image-button" target="_blank" href="https://www.latlong.net/">LatLong.net</a>
                     </div>
                     <button id="add-kapsalon-button" type="submit">Add new kapsalon</button>
                 </form>
@@ -128,7 +131,7 @@
                 <h4 id="kapsalons-admin-title">All kapsalons:</h4>
 
                 <section id="kapsalon-admin-list">
-                   
+
                 </section>
             </div>
         </div>

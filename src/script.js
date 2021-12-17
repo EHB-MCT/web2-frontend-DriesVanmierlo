@@ -272,8 +272,8 @@ window.onload = async function () {
                 let newDelivered = document.getElementById('kapsalon-delivered').value;
                 let newImage = document.getElementById('kapsalon-image').value;
                 let newLink = document.getElementById('kapsalon-link').value;
-                let newMapboxToken = document.getElementById('kapsalon-mapbox-token').value;
-                let newMapboxStyle = document.getElementById('kapsalon-mapbox-style').value;
+                let newLatitude = document.getElementById('kapsalon-latitude').value;
+                let newLongitude = document.getElementById('kapsalon-longitude').value;
 
                 console.log(newDelivered);
 
@@ -297,8 +297,8 @@ window.onload = async function () {
                     delivered: deliveredOptions,
                     price: parseFloat(newPrice),
                     ratings: [],
-                    mapboxToken: newMapboxToken,
-                    mapboxStyle: newMapboxStyle,
+                    latitude: parseFloat(newLatitude),
+                    longitude: parseFloat(newLongitude),
                     latestGeneralRating: 3,
                     image: newImage,
                     link: newLink

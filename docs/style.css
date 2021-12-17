@@ -671,6 +671,23 @@ main {
     height: 300px;
 }
 
+.marker {
+    background-image: url('./images/kapsamazing-logo-transparent.svg');
+    background-size: cover;
+    width: 50px;
+    height: 65px;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    color: var(--brown);
+}
+
 #other-meals-container {
     padding-left: 25px;
     width: 100%;
@@ -1096,7 +1113,8 @@ main {
 }
 
 .new-kapsalon-double-input,
-.new-kapsalon-double-element {
+.new-kapsalon-double-element,
+.new-kapsalon-triple-input {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -1106,7 +1124,7 @@ main {
     width: 48%;
 }
 
-#kew-kapsalon-image-button {
+.new-kapsalon-image-button {
     margin-top: auto;
     background-color: var(--lightbrown);
     color: var(--beige);
@@ -1119,6 +1137,10 @@ main {
 
 .new-kapsalon-double-element .new-kapsalon-input {
     width: 70%;
+}
+
+.new-kapsalon-triple-input .new-kapsalon-input {
+    width: 35%;
 }
 
 .currency-input {
