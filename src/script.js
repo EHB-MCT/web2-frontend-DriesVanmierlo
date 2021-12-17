@@ -11,6 +11,7 @@ window.onload = async function () {
     await loadKapsalonInfo();
     await validateCode();
     await rateKapsalon();
+    await loadKapsalonsAdmin();
 
     async function loadKapsalonsHomepage() {
 
@@ -237,12 +238,26 @@ window.onload = async function () {
 
         }
 
-        document.getElementById('rate-form').addEventListener('change', e => {
-            console.log("Change");
+        if (document.getElementById('rate-form')) {
+            document.getElementById('rate-form').addEventListener('change', e => {
+                console.log("Change");
 
-            document.getElementById('rate-overall-score').innerHTML = updateGeneralRating();
-        });
+                document.getElementById('rate-overall-score').innerHTML = updateGeneralRating();
+            });
+        }
+    }
 
+    async function loadKapsalonsAdmin() {
+        let kapsalonList = [];
+
+        await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                kapsalonList = data;
+                renderKapsalonsAdmin(kapsalonList);
+            })
     }
 }
 
@@ -289,6 +304,67 @@ function renderKapsalonList(kapsalonList) {
             }
         })
     }
+}
+
+function renderKapsalonsAdmin(kapsalonList) {
+    let kapsalonListAdminHTML;
+    kapsalonList.forEach(e => {
+        kapsalonListAdminHTML += `
+        <article class="datalist-kapsalon-article" id="${e._id}">
+        <figure class="kapsalon-article-figure">
+            <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+        </figure>
+        <div class="kapsalon-article-info">
+            <h4 class="kapsalon-article-title">${e.name}</h4>
+            <div class="kapsalon-article-restaurant">
+                <span class="icon-location edit-location-icon"></span>
+                <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
+                <div class="kapsalon-article-restaurant-distance">€${e.price}</div>
+            </div>
+        </div>
+        <div class="kapsalon-article-edit">
+            <span class="icon-bin"></span>
+            <span class="icon-pencil"></span>
+        </div>
+    </article>
+            `
+    });
+
+    if (document.getElementById('kapsalon-admin-list')) {
+        document.getElementById('kapsalon-admin-list').innerHTML = kapsalonListAdminHTML;
+        document.getElementById('kapsalon-admin-list').addEventListener('click', e => {
+            console.log("click on data list", e);
+
+            const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
+            console.log(kapsalonId, e.target);
+
+            if (kapsalonId) {
+                if (e.target.className == "icon-bin") {
+                    deleteKapsalon(kapsalonId);
+                }
+            }
+        })
+    }
+}
+
+function deleteKapsalon(kapsalonId) {
+    console.log("delete kapsalon with id:", kapsalonId)
+
+    fetch(`https://web2-kapsamazing-driesv.herokuapp.com/deleteKapsalon/${kapsalonId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log('Challenge succesfully removed:', data);
+            if (data) {
+                location.reload();
+            }
+        })
 }
 
 function updateLocation(kapsalonList) {
