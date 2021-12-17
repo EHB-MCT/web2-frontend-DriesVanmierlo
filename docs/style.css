@@ -482,7 +482,8 @@ main {
     color: var(--red);
 }
 
-.kapsalon-article-moreinfo {
+.kapsalon-article-moreinfo,
+.kapsalon-article-edit {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1166,6 +1167,29 @@ main {
     font-size: 1.1em;
     font-weight: 800;
     margin-bottom: 10px;
+}
+
+.kapsalon-article-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0;
+}
+
+.kapsalon-article-edit .icon-bin {
+    color: var(--red);
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.kapsalon-article-edit .icon-pencil {
+    color: var(--brown);
+    margin-left: auto;
+    cursor: pointer;
+}
+
+#kapsalon-admin-list .datalist-kapsalon-article {
+    cursor: unset;
 }
 
 /**********************/
