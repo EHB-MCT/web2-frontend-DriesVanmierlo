@@ -669,6 +669,7 @@ function updateGeneralRating() {
 }
 
 function showLocation(kapsalonInfo) {
+    //Source: https://docs.mapbox.com/help/tutorials/custom-markers-gl-js/
     mapboxgl.accessToken =
         'pk.eyJ1IjoiZHJpZXN2YW5taWVybG8iLCJhIjoiY2t4YWRyMHprMHRsdjMwbzFuYnhyYTJoYiJ9.g5b9eLexlxz1LMfwgJnTMA';
 

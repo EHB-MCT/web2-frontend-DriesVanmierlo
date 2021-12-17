@@ -907,6 +907,10 @@ main {
     margin-bottom: 25px;
 }
 
+#admin-title {
+    font-size: 1.5em;
+}
+
 .register-input,
 .login-input {
     color: var(--brown);
@@ -1112,6 +1116,16 @@ main {
     border: 2px solid var(--lightbrown);
 }
 
+.new-kapsalon-input select {
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.new-kapsalon-input select:hover {
+    background-color: var(--brown);
+    transition: 0.5s ease;
+}
+
 .new-kapsalon-double-input,
 .new-kapsalon-double-element,
 .new-kapsalon-triple-input {
@@ -1133,6 +1147,12 @@ main {
     text-decoration: none;
     width: 25%;
     text-align: center;
+    transition: 0.5s ease;
+}
+
+.new-kapsalon-image-button:hover {
+    background-color: var(--brown);
+    transition: 0.5s ease;
 }
 
 .new-kapsalon-double-element .new-kapsalon-input {
@@ -1174,6 +1194,12 @@ main {
     border: none;
     padding: 5px;
     cursor: pointer;
+    transition: 0.5s ease;
+}
+
+#add-kapsalon-button:hover {
+    background-color: var(--lightred);
+    transition: 0.5s ease;
 }
 
 #kapsalon-admin-list {
@@ -1205,6 +1231,7 @@ main {
 }
 
 .kapsalon-article-edit .icon-pencil {
+    display: none;
     color: var(--brown);
     margin-left: auto;
     cursor: pointer;
