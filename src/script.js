@@ -83,7 +83,7 @@ window.onload = async function () {
                         <h3 id="kapsalon-info-header-title">${kapsalonInfo.name}</h3>
                         <div id="kapsalon-info-header-restaurant">
                             <div id="info-header-restaurant-name">${kapsalonInfo.restaurant}</div>
-                            <div id="info-header-restaurant-distance">0,7 km</div>
+                            <div id="info-header-restaurant-distance">${kapsalonInfo.city}</div>
                         </div>
                     </div>
                     <div id="kapsalon-info-header-rating">
@@ -108,12 +108,12 @@ window.onload = async function () {
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-half edit-star-icon"></span></div>
+                                <span class="icon-star-empty edit-star-icon"></span></div>
                             <div><span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-half edit-star-icon"></span></div>
+                                <span class="icon-star-empty edit-star-icon"></span></div>
                             <div><span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
                                 <span class="icon-star-full edit-star-icon"></span>
@@ -132,6 +132,10 @@ window.onload = async function () {
             document.getElementById('other-meals-title').innerHTML = `
                 Other meals from ${kapsalonInfo.restaurant}
                 `
+
+            showLocation(kapsalonInfo);
+
+
         }
     }
 
@@ -208,6 +212,10 @@ window.onload = async function () {
 
                 let newGeneralRating = calculateGeneralScoreNumber(kapsalonInfo.ratings);
                 console.log(newGeneralRating);
+
+                if (newGeneralRating == "no score yet") {
+                    newGeneralRating = Math.round(((ratingFries + ratingMeat + ratingToppings) / 3 + Number.EPSILON) * 10) / 10;
+                }
 
                 const kap = {
                     "ratings": allRatings,
@@ -343,7 +351,7 @@ function renderKapsalonList(kapsalonList) {
                     <div class="kapsalon-article-restaurant">
                         <span class="icon-location edit-location-icon"></span>
                         <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
-                        <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                        <div class="kapsalon-article-restaurant-distance">${e.city}</div>
                     </div>
                 </div>
                 <div class="kapsalon-article-moreinfo">
@@ -605,4 +613,48 @@ function updateGeneralRating() {
     generalRating = parseInt(ratingFries) + parseInt(ratingMeat) + parseInt(ratingToppings);
 
     return `${Math.round((generalRating / 6 + Number.EPSILON) * 10) / 10}/5`;
+}
+
+function showLocation(kapsalonInfo) {
+    mapboxgl.accessToken =
+        'pk.eyJ1IjoiZHJpZXN2YW5taWVybG8iLCJhIjoiY2t4YWRyMHprMHRsdjMwbzFuYnhyYTJoYiJ9.g5b9eLexlxz1LMfwgJnTMA';
+
+    const geojson = {
+        'type': 'FeatureCollection',
+        'features': [{
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [kapsalonInfo.longitude, kapsalonInfo.latitude]
+            },
+            'properties': {
+                'title': `${kapsalonInfo.restaurant}`,
+                'description': `${kapsalonInfo.city}`
+            }
+        }]
+    };
+
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/driesvanmierlo/ckxad43w3bkwr14pczh7w3g0x',
+        center: [kapsalonInfo.longitude, kapsalonInfo.latitude],
+        zoom: 16
+    });
+
+    for (const feature of geojson.features) {
+        const el = document.createElement('div');
+        el.className = 'marker';
+
+        new mapboxgl.Marker(el)
+            .setLngLat(feature.geometry.coordinates)
+            .setPopup(
+                new mapboxgl.Popup({
+                    offset: 25
+                })
+                .setHTML(
+                    `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+                )
+            )
+            .addTo(map);
+    }
 }

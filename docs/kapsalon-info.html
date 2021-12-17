@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@200;300;400;700;900&display=swap" rel="stylesheet">
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
     <script src="main.js"></script>
     <title>Kapsamazing</title>
 </head>
@@ -161,50 +161,7 @@
     </footer>
 
     <script id="mapbox-script">
-        mapboxgl.accessToken =
-            'pk.eyJ1IjoiZHJpZXN2YW5taWVybG8iLCJhIjoiY2t4YWRyMHprMHRsdjMwbzFuYnhyYTJoYiJ9.g5b9eLexlxz1LMfwgJnTMA';
-
-        const geojson = {
-            'type': 'FeatureCollection',
-            'features': [{
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [5.579692, 51.173812]
-                },
-                'properties': {
-                    'title': 'Tasty Food Vesalius',
-                    'description': 'Leuven'
-                }
-            }]
-        };
-
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/driesvanmierlo/ckxad43w3bkwr14pczh7w3g0x',
-            center: [5.579692, 51.173812],
-            zoom: 16
-        });
-
-        // add markers to map
-        for (const feature of geojson.features) {
-            // create a HTML element for each feature
-            const el = document.createElement('div');
-            el.className = 'marker';
-
-            // make a marker for each feature and add it to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(feature.geometry.coordinates)
-                .setPopup(
-                    new mapboxgl.Popup({
-                        offset: 25
-                    }) // add popups
-                    .setHTML(
-                        `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-                    )
-                )
-                .addTo(map);
-        }
+        
     </script>
 </body>
 
