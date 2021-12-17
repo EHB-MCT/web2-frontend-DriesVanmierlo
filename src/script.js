@@ -49,6 +49,18 @@ window.onload = async function () {
             })
         }
 
+        if (document.getElementById('filter-options-form')) {
+            document.getElementById('filter-options-form').addEventListener('change', e => {
+                e.preventDefault();
+                console.log("CHANGE!");
+                if (document.getElementById('search-location-input').value != "") {
+                    updateLocation(kapsalonList);
+                } else {
+                    updateList(kapsalonList);
+                }
+            })
+        }
+
         if (document.getElementById('order-by-form')) {
             document.getElementById('order-by-form').addEventListener('change', e => {
                 e.preventDefault();
@@ -459,7 +471,10 @@ function updateList(kapsalonList) {
     let newList = [];
 
     let kapsalons = document.querySelectorAll("#filter-type-form input[type='checkbox']");
+    let options = document.querySelectorAll("#filter-options-form input[type='checkbox']");
     let orderBy = document.getElementById('order-by-input').value;
+
+    console.log(options);
 
     kapsalons.forEach(e => {
         if (e.checked == true) {
@@ -471,6 +486,24 @@ function updateList(kapsalonList) {
             })
         }
     })
+
+    // let finalList = [];
+
+    // options.forEach(e => {
+    //     if (e.checked == true) {
+    //         console.log(e);
+    //         for (let i = 0; i < newList.length; i++) {
+    //             if (newList[i].delivered.includes(e.value)) {
+    //                 finalList.push(newList[i]);
+    //             }
+    //         }
+    //     } else if (e.checked == true) {
+    //         console.log(e.checked);
+    //     }
+    // })
+
+    console.log(newList);
+
     sortKapsalons(newList, orderBy)
     renderKapsalonList(newList);
 }
