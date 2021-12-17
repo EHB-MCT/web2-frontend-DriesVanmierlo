@@ -75,7 +75,7 @@ window.onload = async function () {
             console.log(kapsalonInfo);
             document.getElementById('kapsalon-info-section').innerHTML = `
                 <figure class="kapsalon-info-figure">
-                <img class="kapsalon-info-img" src="./images/example-kapsalon-1.jpg" alt="">
+                <img class="kapsalon-info-img" src="${kapsalonInfo.image}" alt="kapsalon from ${kapsalonInfo.restaurant}">
             </figure>
             <div id="kapsalon-info-container">
                 <div id="kapsalon-info-header">
@@ -123,7 +123,7 @@ window.onload = async function () {
                     </div>
                 </div>
                 <div id="kapsalon-info-order">
-                    <a href="#">Order</a>
+                    <a href="${kapsalonInfo.link}" target="_blank">Order</a>
                     <div>€${kapsalonInfo.price}</div>
                 </div>
             </div>
@@ -258,6 +258,72 @@ window.onload = async function () {
                 kapsalonList = data;
                 renderKapsalonsAdmin(kapsalonList);
             })
+
+        if (document.getElementById('add-kapsalon-form')) {
+            let addForm = document.getElementById('add-kapsalon-form');
+            addForm.addEventListener('submit', e => {
+                e.preventDefault();
+                let newKapid = document.getElementById('kapsalon-kapid').value;
+                let newName = document.getElementById('kapsalon-name').value;
+                let newRestaurant = document.getElementById('kapsalon-restaurant').value;
+                let newCity = document.getElementById('kapsalon-city').value;
+                let newPrice = document.getElementById('kapsalon-price').value;
+                let newType = document.getElementById('kapsalon-type').value;
+                let newDelivered = document.getElementById('kapsalon-delivered').value;
+                let newImage = document.getElementById('kapsalon-image').value;
+                let newLink = document.getElementById('kapsalon-link').value;
+                let newMapboxToken = document.getElementById('kapsalon-mapbox-token').value;
+                let newMapboxStyle = document.getElementById('kapsalon-mapbox-style').value;
+
+                console.log(newDelivered);
+
+                let deliveredOptions = [];
+
+                if (newDelivered == "pickup-and-delivery") {
+                    deliveredOptions.push("pickup");
+                    deliveredOptions.push("delivery")
+                } else if (newDelivered == "pickup") {
+                    deliveredOptions.push("pickup");
+                } else if (newDelivered == "delivery") {
+                    deliveredOptions.push("delivery");
+                }
+
+                const kap = {
+                    kapid: newKapid,
+                    name: newName,
+                    city: newCity,
+                    restaurant: newRestaurant,
+                    type: newType,
+                    delivered: deliveredOptions,
+                    price: parseFloat(newPrice),
+                    ratings: [],
+                    mapboxToken: newMapboxToken,
+                    mapboxStyle: newMapboxStyle,
+                    latestGeneralRating: 3,
+                    image: newImage,
+                    link: newLink
+                }
+                console.log(kap);
+
+                fetch("https://web2-kapsamazing-driesv.herokuapp.com/saveKapsalon", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(kap)
+                    })
+                    .then(res => {
+                        res.json()
+                    })
+                    .then(data => {
+                        alert("Kapsalon succesful added!");
+                        location.reload();
+                    })
+                    .catch(error => {
+                        alert("Something went wrong, code may exist already", error);
+                    });
+            })
+        }
     }
 }
 
@@ -270,7 +336,7 @@ function renderKapsalonList(kapsalonList) {
             <a class="kapsalon-article-a" href="./kapsalon-info.html">
             <article class="datalist-kapsalon-article" id="${e._id}">
                 <figure class="kapsalon-article-figure">
-                    <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                    <img class="kapsalon-article-img" src="${e.image}" alt="kapsalon from ${e.restaurant}">
                 </figure>
                 <div class="kapsalon-article-info">
                     <h4 class="kapsalon-article-title">${e.name}</h4>
@@ -312,7 +378,7 @@ function renderKapsalonsAdmin(kapsalonList) {
         kapsalonListAdminHTML += `
         <article class="datalist-kapsalon-article" id="${e._id}">
         <figure class="kapsalon-article-figure">
-            <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+            <img class="kapsalon-article-img" src="${e.image}" alt="kapsalon from ${e.restaurant}">
         </figure>
         <div class="kapsalon-article-info">
             <h4 class="kapsalon-article-title">${e.name}</h4>
