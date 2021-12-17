@@ -127,15 +127,24 @@ window.onload = async function () {
                     <div>€${kapsalonInfo.price}</div>
                 </div>
             </div>
-                `
+                `;
 
             document.getElementById('other-meals-title').innerHTML = `
                 Other meals from ${kapsalonInfo.restaurant}
-                `
+                `;
+
+            fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    kapsalonList = data;
+                    filterKapsalonsRestaurant(kapsalonList, kapsalonInfo.restaurant, kapsalonInfo.city, kapsalonInfo._id);
+                    renderKapsalonList(kapsalonList);
+                })
+
 
             showLocation(kapsalonInfo);
-
-
         }
     }
 
@@ -488,6 +497,60 @@ function sortKapsalons(kapsalonList, orderBy) {
     } else {
         kapsalonList.sort((a, b) => {
             return a["price"] - b["price"];
+        })
+    }
+}
+
+function filterKapsalonsRestaurant(kapsalonList, restaurant, city, currentKapsalon) {
+    console.log(kapsalonList);
+    let newList = [];
+    kapsalonList.forEach(e => {
+        if (e.restaurant == restaurant && e.city == city && e._id != currentKapsalon) {
+            newList.push(e);
+        }
+    })
+    console.log(newList);
+    renderCommonRestaurant(newList);
+}
+
+function renderCommonRestaurant(kapsalonList) {
+    let kapsalonListCommonHTML;
+    kapsalonList.forEach(e => {
+        kapsalonListCommonHTML += `
+        <a class="kapsalon-article-a" href="#">
+            <article class="datalist-kapsalon-article" id="${e._id}">
+                <figure class="kapsalon-article-figure">
+                    <img class="kapsalon-article-img" src="${e.image}" alt="kapsalon from ${e.restaurant}">
+                </figure>
+                <div class="kapsalon-article-info">
+                    <h4 class="kapsalon-article-title">${e.name}</h4>
+                    <div class="kapsalon-article-restaurant">
+                        <span class="icon-location edit-location-icon"></span>
+                        <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
+                        <div class="kapsalon-article-restaurant-distance">${e.city}</div>
+                    </div>
+                </div>
+                <div class="kapsalon-article-moreinfo">
+                    <div class="kapsalon-article-rating">
+                        <div class="kapsalon-article-rating-number">${calculateGeneralScore(e.ratings)}
+                    </div>
+                    <div class="kapsalon-article-price">€${e.price}</div>
+                </div>
+            </article>
+        </a>
+            `
+    });
+
+    if (document.getElementById('other-meals-datalist')) {
+        document.getElementById('other-meals-datalist').innerHTML = kapsalonListCommonHTML;
+        document.getElementById('other-meals-datalist').addEventListener('click', e => {
+
+            const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
+
+            if (kapsalonId) {
+                localStorage.setItem("kapsalonId", kapsalonId);
+                location.reload();
+            }
         })
     }
 }
