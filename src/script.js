@@ -104,21 +104,9 @@ window.onload = async function () {
                             <div>${calculateIngredientScore("toppings", kapsalonInfo.ratings)}</div>
                         </div>
                         <div id="info-scores-stars">
-                            <div><span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-empty edit-star-icon"></span></div>
-                            <div><span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-empty edit-star-icon"></span></div>
-                            <div><span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-full edit-star-icon"></span>
-                                <span class="icon-star-empty edit-star-icon"></span></div>
+                            <div>${calculateStars(parseFloat(calculateIngredientScore("fries", kapsalonInfo.ratings)))}</div>
+                            <div>${calculateStars(parseFloat(calculateIngredientScore("meat", kapsalonInfo.ratings)))}</div>
+                            <div>${calculateStars(parseFloat(calculateIngredientScore("toppings", kapsalonInfo.ratings)))}</div>
                         </div>
                     </div>
                 </div>
@@ -568,48 +556,7 @@ function calculateGeneralScore(ratings) {
 
         generalScore = Math.round((generalScore / (numberRatings * 3) + Number.EPSILON) * 10) / 10;
 
-        let stars = "";
-        let starEmpty = `<span class="icon-star-empty edit-star-icon"></span>`;
-        let starHalf = `<span class="icon-star-half edit-star-icon"></span>`;
-        let starFull = `<span class="icon-star-full edit-star-icon"></span>`;
-
-        if (generalScore > 4.5) {
-            for (let i = 0; i < 5; i++) {
-                stars += `${starFull}`;
-            }
-        } else if (generalScore > 3.5) {
-            for (let i = 0; i < 4; i++) {
-                stars += `${starFull}`;
-            }
-            stars += `${starEmpty}`;
-        } else if (generalScore > 2.5) {
-            for (let i = 0; i < 3; i++) {
-                stars += `${starFull}`;
-            }
-            for (let i = 0; i < 2; i++) {
-                stars += `${starEmpty}`;
-            }
-        } else if (generalScore > 1.5) {
-            for (let i = 0; i < 2; i++) {
-                stars += `${starFull}`;
-            }
-            for (let i = 0; i < 3; i++) {
-                stars += `${starEmpty}`;
-            }
-        } else if (generalScore > 0.5) {
-            for (let i = 0; i < 1; i++) {
-                stars += `${starFull}`;
-            }
-            for (let i = 0; i < 4; i++) {
-                stars += `${starEmpty}`;
-            }
-        } else {
-            for (let i = 0; i < 5; i++) {
-                stars += `${starEmpty}`;
-            }
-        }
-
-        return `${generalScore}/5 <div class="lightbrown">(${numberRatings})</div></div>${stars}`;
+        return `${generalScore}/5 <div class="lightbrown">(${numberRatings})</div></div>${calculateStars(generalScore)}`;
         //Source: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
 
     } else {
@@ -622,6 +569,49 @@ function calculateGeneralScore(ratings) {
         }
         return `no score yet </div>${stars}`;
     }
+}
+
+function calculateStars(score) {
+    let stars = "";
+    let starEmpty = `<span class="icon-star-empty edit-star-icon"></span>`;
+    let starFull = `<span class="icon-star-full edit-star-icon"></span>`;
+
+    if (score > 4.5) {
+        for (let i = 0; i < 5; i++) {
+            stars += `${starFull}`;
+        }
+    } else if (score > 3.5) {
+        for (let i = 0; i < 4; i++) {
+            stars += `${starFull}`;
+        }
+        stars += `${starEmpty}`;
+    } else if (score > 2.5) {
+        for (let i = 0; i < 3; i++) {
+            stars += `${starFull}`;
+        }
+        for (let i = 0; i < 2; i++) {
+            stars += `${starEmpty}`;
+        }
+    } else if (score > 1.5) {
+        for (let i = 0; i < 2; i++) {
+            stars += `${starFull}`;
+        }
+        for (let i = 0; i < 3; i++) {
+            stars += `${starEmpty}`;
+        }
+    } else if (score > 0.5) {
+        for (let i = 0; i < 1; i++) {
+            stars += `${starFull}`;
+        }
+        for (let i = 0; i < 4; i++) {
+            stars += `${starEmpty}`;
+        }
+    } else {
+        for (let i = 0; i < 5; i++) {
+            stars += `${starEmpty}`;
+        }
+    }
+    return stars;
 }
 
 function calculateGeneralScoreNumber(ratings) {
