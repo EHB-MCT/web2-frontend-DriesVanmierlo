@@ -415,8 +415,7 @@ main {
 
 /***KAPSALON DATALIST***/
 
-#kapsalon-datalist,
-#kapsalon-admin-list {
+#kapsalon-datalist {
     width: 70%;
 }
 
@@ -1006,7 +1005,7 @@ main {
     padding-bottom: 25px;
 }
 
-.profile-list-section > h4 {
+.profile-list-section>h4 {
     color: var(--red);
     font-size: 1.3em;
     font-weight: 800;
@@ -1035,6 +1034,138 @@ main {
 
 .edit-bin-icon {
     font-weight: 100;
+}
+
+/**************************/
+/***     ADMIN PAGE     ***/
+/**************************/
+
+#add-and-datalist {
+    display: flex;
+}
+
+#add-kapsalon-section {
+    width: 50%;
+    margin-top: 0;
+}
+
+#add-kapsalon-form h4 {
+    color: var(--brown);
+    font-size: 1.1em;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+#add-kapsalon-form {
+    background-color: var(--beige);
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.new-kapsalon-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-kapsalon-input input::placeholder {
+    color: var(--lightbrown);
+    font-weight: 200;
+    font-size: 1.1em;
+}
+
+.new-kapsalon-input label,
+.new-kapsalon-input input,
+.new-kapsalon-input select {
+    color: var(--brown);
+    font-weight: 600;
+}
+
+.new-kapsalon-input select {
+    background-color: var(--lightbrown);
+    color: var(--beige);
+}
+
+.new-kapsalon-input input,
+.new-kapsalon-input select {
+    padding: 5px;
+    margin-top: 3px;
+    margin-bottom: 7px;
+    border: 2px solid var(--lightbrown);
+}
+
+.new-kapsalon-double-input,
+.new-kapsalon-double-element {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.new-kapsalon-double-input .new-kapsalon-input {
+    width: 48%;
+}
+
+#kew-kapsalon-image-button {
+    margin-top: auto;
+    background-color: var(--lightbrown);
+    color: var(--beige);
+    margin-bottom: 7px;
+    padding: 5px;
+    text-decoration: none;
+    width: 25%;
+    text-align: center;
+}
+
+.new-kapsalon-double-element .new-kapsalon-input {
+    width: 70%;
+}
+
+.currency-input {
+    margin-top: 3px;
+    border: 2px solid var(--lightbrown);
+    background-color: var(--white);
+    height: 27px;
+    color: var(--brown);
+    font-size: 800;
+    padding-left: 3px;
+}
+
+.currency-input input {
+    position: relative;
+    top: -2px;
+    background-color: none;
+    border: none;
+    width: 90%;
+
+}
+
+#add-kapsalon-button {
+    display: flex;
+    margin-left: auto;
+    margin-top: 5px;
+    width: 175px;
+    color: var(--beige);
+    background-color: var(--red);
+    font-size: 1.2em;
+    font-weight: 800;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#kapsalon-admin-list {
+    margin-top: 0;
+}
+
+#kapsalon-admin-list-container {
+    width: 50%;
+}
+
+#kapsalons-admin-title {
+    color: var(--brown);
+    font-size: 1.1em;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
 /**********************/

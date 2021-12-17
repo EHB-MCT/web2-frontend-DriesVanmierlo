@@ -35,7 +35,7 @@
         </section>
         <section id="main-navigation-section">
             <nav id="main-navigation-nav">
-                <a href="#" class="navigation-tap checked-nav">Home</a>
+                <a href="./index.html" class="navigation-tap checked-nav">Home</a>
                 <a href="./code.html" class="navigation-tap">Code</a>
                 <a href="./profile.html" class="navigation-tap">Profile</a>
             </nav>
@@ -44,9 +44,99 @@
 
     <main>
         <h3 id="admin-title">Adminpage</h3>
-        <div id="filter-and-datalist">
-            <section id="kapsalon-admin-list">
-                <a class="kapsalon-article-a" href="./kapsalon-info.html">
+        <div id="add-and-datalist">
+            <section id="add-kapsalon-section">
+                <form id="add-kapsalon-form">
+                    <h4>Add a new kapsalon</h4>
+                    <div class="new-kapsalon-input">
+                        <label for="kapsalon-name">Name:</label>
+                        <input required placeholder="E.g. Kapsalon kebab" type="text" name="kapsalon-name"
+                            id="kapsalon-name">
+                    </div>
+                    <div class="new-kapsalon-input">
+                        <label for="kapsalon-restaurant">Restraurant:</label>
+                        <input required placeholder="E.g. Tasty Kebab" type="text" name="kapsalon-restaurant"
+                            id="kapsalon-restaurant">
+                    </div>
+                    <div class="new-kapsalon-double-input">
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-city">City:</label>
+                            <input required placeholder="E.g. Brussels" type="text" name="kapsalon-city"
+                                id="kapsalon-city">
+                        </div>
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-price">Price:</label>
+                            <span class="currency-input">€
+                                <input required placeholder="E.g. 8.50" type="text" name="kapsalon-price"
+                                    id="kapsalon-price">
+                            </span>
+                            <!-- Source: https://stackoverflow.com/questions/2913236/html-text-input-field-with-currency-symbol -->
+                        </div>
+                    </div>
+                    <div class="new-kapsalon-double-input">
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-type">Type:</label>
+                            <input required placeholder="E.g. kebab" type="text" name="kapsalon-type"
+                                id="kapsalon-type">
+                        </div>
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-delivered">Delivered:</label>
+                            <select required name="kapsalon-delivered" id="kapsalon-delivered">
+                                <option value="pickup-and-delivered">Pickup and delivery</option>
+                                <option value="pickup">Pickup only</option>
+                                <option value="delivery">Delivery only</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="new-kapsalon-double-element">
+                        <div class="new-kapsalon-input">
+                            <label for="kapsalon-image">Image:</label>
+                            <input required placeholder="E.g. https://..." type="text" name="kapsalon-image"
+                                id="kapsalon-image">
+                        </div>
+                        <a id="kew-kapsalon-image-button" target="_blank" href="https://nl.imgbb.com/">Image link
+                            site</a>
+                    </div>
+                    <div class="new-kapsalon-input">
+                        <label for="kapsalon-link">Link to order:</label>
+                        <input required placeholder="E.g. https://..." type="text" name="kapsalon-link"
+                            id="kapsalon-link">
+                    </div>
+                    <div class="new-kapsalon-input">
+                        <label for="kapsalon-mapbox-token">Mapbox token:</label>
+                        <input required placeholder="E.g. pk. ..." type="text" name="kapsalon-mapbox-token"
+                            id="kapsalon-mapbox-token">
+                    </div>
+                    <div class="new-kapsalon-input">
+                        <label for="kapsalon-mapbox-style">Mapbox Style:</label>
+                        <input required placeholder="E.g. mapbox.//..." type="text" name="kapsalon-mapbox-style"
+                            id="kapsalon-mapbox-style">
+                    </div>
+                    <button id="add-kapsalon-button" type="submit">Add new kapsalon</button>
+                </form>
+            </section>
+            <div id="kapsalon-admin-list-container">
+                <h4 id="kapsalons-admin-title">All kapsalons:</h4>
+                <section id="kapsalon-admin-list">
+                    <a class="kapsalon-article-a" href="./kapsalon-info.html">
+                        <article class="datalist-kapsalon-article">
+                            <figure class="kapsalon-article-figure">
+                                <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                            </figure>
+                            <div class="kapsalon-article-info">
+                                <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                                <div class="kapsalon-article-restaurant">
+                                    <span class="icon-location edit-location-icon"></span>
+                                    <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                    <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                                </div>
+                            </div>
+                            <div class="kapsalon-article-moreinfo">
+                                <span class="icon-bin"></span>
+                                <span class="icon-pencil"></span>
+                            </div>
+                        </article>
+                    </a>
                     <article class="datalist-kapsalon-article">
                         <figure class="kapsalon-article-figure">
                             <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
@@ -64,76 +154,59 @@
                             <span class="icon-pencil"></span>
                         </div>
                     </article>
-                </a>
-                <article class="datalist-kapsalon-article">
-                    <figure class="kapsalon-article-figure">
-                        <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
-                    </figure>
-                    <div class="kapsalon-article-info">
-                        <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
-                        <div class="kapsalon-article-restaurant">
-                            <span class="icon-location edit-location-icon"></span>
-                            <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
-                            <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                    <article class="datalist-kapsalon-article">
+                        <figure class="kapsalon-article-figure">
+                            <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                        </figure>
+                        <div class="kapsalon-article-info">
+                            <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                            <div class="kapsalon-article-restaurant">
+                                <span class="icon-location edit-location-icon"></span>
+                                <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="kapsalon-article-moreinfo">
-                        <span class="icon-bin"></span>
-                        <span class="icon-pencil"></span>
-                    </div>
-                </article>
-                <article class="datalist-kapsalon-article">
-                    <figure class="kapsalon-article-figure">
-                        <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
-                    </figure>
-                    <div class="kapsalon-article-info">
-                        <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
-                        <div class="kapsalon-article-restaurant">
-                            <span class="icon-location edit-location-icon"></span>
-                            <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
-                            <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                        <div class="kapsalon-article-moreinfo">
+                            <span class="icon-bin"></span>
+                            <span class="icon-pencil"></span>
                         </div>
-                    </div>
-                    <div class="kapsalon-article-moreinfo">
-                        <span class="icon-bin"></span>
-                        <span class="icon-pencil"></span>
-                    </div>
-                </article>
-                <article class="datalist-kapsalon-article">
-                    <figure class="kapsalon-article-figure">
-                        <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
-                    </figure>
-                    <div class="kapsalon-article-info">
-                        <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
-                        <div class="kapsalon-article-restaurant">
-                            <span class="icon-location edit-location-icon"></span>
-                            <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
-                            <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                    </article>
+                    <article class="datalist-kapsalon-article">
+                        <figure class="kapsalon-article-figure">
+                            <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                        </figure>
+                        <div class="kapsalon-article-info">
+                            <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                            <div class="kapsalon-article-restaurant">
+                                <span class="icon-location edit-location-icon"></span>
+                                <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="kapsalon-article-moreinfo">
-                        <span class="icon-bin"></span>
-                        <span class="icon-pencil"></span>
-                    </div>
-                </article>
-                <article class="datalist-kapsalon-article">
-                    <figure class="kapsalon-article-figure">
-                        <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
-                    </figure>
-                    <div class="kapsalon-article-info">
-                        <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
-                        <div class="kapsalon-article-restaurant">
-                            <span class="icon-location edit-location-icon"></span>
-                            <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
-                            <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                        <div class="kapsalon-article-moreinfo">
+                            <span class="icon-bin"></span>
+                            <span class="icon-pencil"></span>
                         </div>
-                    </div>
-                    <div class="kapsalon-article-moreinfo">
-                        <span class="icon-bin"></span>
-                        <span class="icon-pencil"></span>
-                    </div>
-                </article>
-            </section>
+                    </article>
+                    <article class="datalist-kapsalon-article">
+                        <figure class="kapsalon-article-figure">
+                            <img class="kapsalon-article-img" src="./images/example-kapsalon-1.jpg" alt="">
+                        </figure>
+                        <div class="kapsalon-article-info">
+                            <h4 class="kapsalon-article-title">Kapsalon Kebab</h4>
+                            <div class="kapsalon-article-restaurant">
+                                <span class="icon-location edit-location-icon"></span>
+                                <div class="kapsalon-article-restaurant-name">Rana Kebab</div>
+                                <div class="kapsalon-article-restaurant-distance">0,7 km</div>
+                            </div>
+                        </div>
+                        <div class="kapsalon-article-moreinfo">
+                            <span class="icon-bin"></span>
+                            <span class="icon-pencil"></span>
+                        </div>
+                    </article>
+                </section>
+            </div>
         </div>
     </main>
 
