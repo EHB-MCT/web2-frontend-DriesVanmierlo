@@ -63,7 +63,11 @@ window.onload = async function () {
             document.getElementById('order-by-form').addEventListener('change', e => {
                 e.preventDefault();
                 console.log("ORDER!")
-                updateList(kapsalonList);
+                if (document.getElementById('search-location-input').value != "") {
+                    updateLocation(kapsalonList);
+                } else {
+                    updateList(kapsalonList);
+                }
             })
         }
     }
@@ -373,7 +377,7 @@ function renderKapsalonList(kapsalonList) {
 
     if (document.getElementById('kapsalon-datalist')) {
         if (kapsalonListHomepageHTML == "") {
-            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons found with your filters.</div>`
+            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons found with your filters.</div>`;
         }
         document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
         document.getElementById('kapsalon-datalist').addEventListener('click', e => {
@@ -397,7 +401,7 @@ function renderKapsalonsAdmin(kapsalonList) {
         <figure class="kapsalon-article-figure">
             <img class="kapsalon-article-img" src="${e.image}" alt="kapsalon from ${e.restaurant}">
         </figure>
-        <div class="kapsalon-article-info">
+        <div class="kapsalon-article-info-admin">
             <h4 class="kapsalon-article-title">${e.name}</h4>
             <div class="kapsalon-article-restaurant">
                 <span class="icon-location edit-location-icon"></span>
@@ -415,6 +419,9 @@ function renderKapsalonsAdmin(kapsalonList) {
     });
 
     if (document.getElementById('kapsalon-admin-list')) {
+        if (kapsalonListAdminHTML == "") {
+            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons added yet.</div>`
+        }
         document.getElementById('kapsalon-admin-list').innerHTML = kapsalonListAdminHTML;
         document.getElementById('kapsalon-admin-list').addEventListener('click', e => {
             console.log("click on data list", e);
@@ -569,6 +576,9 @@ function renderCommonRestaurant(kapsalonList) {
     });
 
     if (document.getElementById('other-meals-datalist')) {
+        if (kapsalonListCommonHTML == "") {
+            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No other kapsalons found.</div>`
+        }
         document.getElementById('other-meals-datalist').innerHTML = kapsalonListCommonHTML;
         document.getElementById('other-meals-datalist').addEventListener('click', e => {
 
