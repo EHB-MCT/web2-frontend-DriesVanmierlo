@@ -460,7 +460,7 @@ function updateLocation(kapsalonList) {
     //Source: https://flexiple.com/javascript-capitalize-first-letter/
 
     kapsalonList.forEach(e => {
-        if (city == e.city || city == e.restaurant) {
+        if (e.city.includes(city) || e.restaurant.includes(`${city}`)) {
             newList.push(e);
         }
     })
