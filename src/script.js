@@ -372,6 +372,9 @@ function renderKapsalonList(kapsalonList) {
     });
 
     if (document.getElementById('kapsalon-datalist')) {
+        if (kapsalonListHomepageHTML == "") {
+            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons found with your filters.</div>`
+        }
         document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
         document.getElementById('kapsalon-datalist').addEventListener('click', e => {
             console.log("click on data list", e);
@@ -483,25 +486,32 @@ function updateList(kapsalonList) {
         }
     })
 
-    // let finalList = [];
+    let finalList = [];
 
-    // options.forEach(e => {
-    //     if (e.checked == true) {
-    //         console.log(e);
-    //         for (let i = 0; i < newList.length; i++) {
-    //             if (newList[i].delivered.includes(e.value)) {
-    //                 finalList.push(newList[i]);
-    //             }
-    //         }
-    //     } else if (e.checked == true) {
-    //         console.log(e.checked);
-    //     }
-    // })
+    if (options[0].checked == true && options[1].checked == true) {
+        newList.forEach(e => {
+            if (e.delivered.includes("pickup") || e.delivered.includes("delivery")) {
+                finalList.push(e);
+            }
+        })
+    } else if (options[0].checked == true) {
+        newList.forEach(e => {
+            if (e.delivered.includes("pickup")) {
+                finalList.push(e);
+            }
+        })
+    } else if (options[1].checked == true) {
+        newList.forEach(e => {
+            if (e.delivered.includes("delivery")) {
+                finalList.push(e);
+            }
+        })
+    } else {
+        finalList = newList;
+    }
 
-    console.log(newList);
-
-    sortKapsalons(newList, orderBy)
-    renderKapsalonList(newList);
+    sortKapsalons(finalList, orderBy)
+    renderKapsalonList(finalList);
 }
 
 function sortKapsalons(kapsalonList, orderBy) {

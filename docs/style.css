@@ -528,6 +528,13 @@ main {
     font-size: 1.2em;
 }
 
+.no-kapsalons-message {
+    background-color: var(--lightred);
+    color: var(--beige);
+    padding: 10px;
+    text-align: center;
+}
+
 /**********************************/
 /***     MORE INFO KAPSALON     ***/
 /**********************************/
