@@ -5,8 +5,6 @@ const {
 
 window.onload = async function () {
 
-    console.log("Loaded")
-
     await loadKapsalonsHomepage();
     await loadKapsalonInfo();
     await validateCode();
@@ -84,7 +82,6 @@ window.onload = async function () {
             })
 
         if (document.getElementById('kapsalon-info-section')) {
-            console.log(kapsalonInfo);
             document.getElementById('kapsalon-info-section').innerHTML = `
                 <figure class="kapsalon-info-figure">
                 <img class="kapsalon-info-img" src="${kapsalonInfo.image}" alt="kapsalon from ${kapsalonInfo.restaurant}">
@@ -347,7 +344,7 @@ window.onload = async function () {
 //General functions
 
 function renderKapsalonList(kapsalonList) {
-    let kapsalonListHomepageHTML;
+    let kapsalonListHomepageHTML = "";
     kapsalonList.forEach(e => {
         kapsalonListHomepageHTML += `
             <a class="kapsalon-article-a" href="./kapsalon-info.html">
@@ -390,7 +387,7 @@ function renderKapsalonList(kapsalonList) {
 }
 
 function renderKapsalonsAdmin(kapsalonList) {
-    let kapsalonListAdminHTML;
+    let kapsalonListAdminHTML = "";
     kapsalonList.forEach(e => {
         kapsalonListAdminHTML += `
         <article class="datalist-kapsalon-article" id="${e._id}">
@@ -474,8 +471,6 @@ function updateList(kapsalonList) {
     let options = document.querySelectorAll("#filter-options-form input[type='checkbox']");
     let orderBy = document.getElementById('order-by-input').value;
 
-    console.log(options);
-
     kapsalons.forEach(e => {
         if (e.checked == true) {
 
@@ -535,7 +530,7 @@ function filterKapsalonsRestaurant(kapsalonList, restaurant, city, currentKapsal
 }
 
 function renderCommonRestaurant(kapsalonList) {
-    let kapsalonListCommonHTML;
+    let kapsalonListCommonHTML = "";
     kapsalonList.forEach(e => {
         kapsalonListCommonHTML += `
         <a class="kapsalon-article-a" href="#">
