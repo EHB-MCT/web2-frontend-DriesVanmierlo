@@ -399,7 +399,8 @@ function renderKapsalonsAdmin(kapsalonList) {
             <div class="kapsalon-article-restaurant">
                 <span class="icon-location edit-location-icon"></span>
                 <div class="kapsalon-article-restaurant-name">${e.restaurant}</div>
-                <div class="kapsalon-article-restaurant-distance">€${e.price}</div>
+                <div class="kapsalon-article-restaurant-price">€${e.price}</div>
+                <div class="kapsalon-article-restaurant-id">code: ${e.kapid}</div>
             </div>
         </div>
         <div class="kapsalon-article-edit">

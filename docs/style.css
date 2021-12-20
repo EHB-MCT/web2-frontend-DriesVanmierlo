@@ -478,6 +478,15 @@ main {
     padding-right: 10px;
 }
 
+.kapsalon-article-restaurant-id {
+    color: var(--lightred);
+}
+
+.kapsalon-article-restaurant-price {
+    color: var(--red);
+    padding-right: 10px;
+}
+
 .kapsalon-article-restaurant-distance {
     color: var(--red);
 }
@@ -969,6 +978,16 @@ main {
 /***********************/
 /***     PROFILE     ***/
 /***********************/
+
+#profile-disclaimer {
+    text-align: center;
+    background-color: var(--lightred);
+    color: var(--beige);
+    padding: 5px 10px;
+    font-weight: 800;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
 
 #main-profile {
     display: flex;
