@@ -191,9 +191,9 @@ window.onload = async function () {
             })
 
         if (document.getElementById('rate-form')) {
-            console.log("Start rating");
 
             document.getElementById("rate-title").innerHTML = `Rate "${kapsalonInfo.name}" from "${kapsalonInfo.restaurant}"`;
+            document.getElementById("rate-kapsalon-figure").innerHTML = `<img class="kapsalon-info-img" src="${kapsalonInfo.image}" alt="Kapsalon from ${kapsalonInfo.restaurant}">`
 
             document.getElementById('rate-form').addEventListener('submit', e => {
                 e.preventDefault();
