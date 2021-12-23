@@ -1107,7 +1107,7 @@ main {
 /**************************/
 
 #add-and-datalist {
-    display: flex;
+    display: none;
 }
 
 #add-kapsalon-section {

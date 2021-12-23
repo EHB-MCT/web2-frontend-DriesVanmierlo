@@ -21,6 +21,9 @@ window.onload = async function () {
     if (document.getElementById('kapsalon-admin-list')) {
         await loadKapsalonsAdmin();
     }
+    if (document.getElementById('login-admin')) {
+        await loginAdmin();
+    }
 
     async function loadKapsalonsHomepage() {
         let kapsalonList = [];
@@ -284,6 +287,11 @@ window.onload = async function () {
     }
 
     async function loadKapsalonsAdmin() {
+        if (sessionStorage.admin == "true") {
+            document.getElementById('login-admin').style.display = "none";
+            document.getElementById('add-and-datalist').style.display = "flex";
+        }
+
         let kapsalonList = [];
 
         //fetch all kapsalons
@@ -362,6 +370,44 @@ window.onload = async function () {
                         alert("Something went wrong, code may exist already", error);
                     });
             })
+        }
+    }
+
+    async function loginAdmin() {
+        if (sessionStorage.admin == "true") {
+            document.getElementById('login-admin').style.display = "none";
+            document.getElementById('add-and-datalist').style.display = "flex";
+        } else {
+            document.getElementById('register-form').addEventListener('submit', e => {
+                e.preventDefault();
+
+                let email = document.getElementById('login-email').value;
+                let password = document.getElementById('login-password').value;
+
+                fetch("https://web2-kapsamazing-driesv.herokuapp.com/loginAdmin", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    })
+                    .then(res => {
+                        return res.json()
+                    })
+                    .then(data => {
+                        if (data.login == true) {
+                            document.getElementById('login-admin').style.display = "none";
+                            document.getElementById('add-and-datalist').style.display = "flex";
+                            sessionStorage.setItem("admin", "true");
+                        }
+                    })
+                    .catch(error => {
+                        alert("Something went wrong, email or password is not correct", error);
+                    });
+            });
         }
     }
 }
