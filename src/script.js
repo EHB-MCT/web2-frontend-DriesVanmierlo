@@ -701,6 +701,7 @@ function calculateStars(score) {
     return stars;
 }
 
+//function to calculate the latest general overall rating
 function calculateGeneralScoreNumber(ratings) {
     if (ratings.length > 0) {
 
@@ -722,6 +723,7 @@ function calculateGeneralScoreNumber(ratings) {
     }
 }
 
+//function to calculate the average score of each ingredient
 function calculateIngredientScore(ingredient, ratings) {
     if (ratings.length > 0) {
         let ingredientScore = 0;
@@ -743,6 +745,7 @@ function calculateIngredientScore(ingredient, ratings) {
     }
 }
 
+//function to update general rating of ratepage when changing the sliders
 function updateGeneralRating() {
     let ratingFries = document.getElementById('range-fries').value;
     let ratingMeat = document.getElementById('range-meat').value;
@@ -754,6 +757,7 @@ function updateGeneralRating() {
     return `${Math.round((generalRating / 6 + Number.EPSILON) * 10) / 10}/5`;
 }
 
+//function to correctly show the location of the restaurant and add a label
 function showLocation(kapsalonInfo) {
     //Source: https://docs.mapbox.com/help/tutorials/custom-markers-gl-js/
     mapboxgl.accessToken =
