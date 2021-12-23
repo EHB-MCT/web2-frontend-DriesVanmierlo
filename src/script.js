@@ -374,12 +374,14 @@ window.onload = async function () {
     }
 
     async function loginAdmin() {
+        //check if a admin already logged in
         if (sessionStorage.admin == "true") {
             document.getElementById('login-admin').style.display = "none";
             document.getElementById('add-and-datalist').style.display = "flex";
         } else {
             document.getElementById('register-form').addEventListener('change', e => {
                 e.preventDefault();
+                //Toggle to show or hide password
                 if (document.getElementById('show-password').checked) {
                     document.getElementById('login-password').type = "text";
                 } else {
@@ -390,9 +392,11 @@ window.onload = async function () {
             document.getElementById('register-form').addEventListener('submit', e => {
                 e.preventDefault();
 
+                //get values of login form
                 let email = document.getElementById('login-email').value;
                 let password = document.getElementById('login-password').value;
 
+                //fetch logindata and check if those are correct
                 fetch("https://web2-kapsamazing-driesv.herokuapp.com/loginAdmin", {
                         method: "POST",
                         headers: {
@@ -408,6 +412,7 @@ window.onload = async function () {
                     })
                     .then(data => {
                         if (data.login == true) {
+                            //if correct, load content
                             document.getElementById('login-admin').style.display = "none";
                             document.getElementById('add-and-datalist').style.display = "flex";
                             sessionStorage.setItem("admin", "true");
