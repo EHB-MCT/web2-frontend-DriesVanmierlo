@@ -1295,7 +1295,6 @@ main {
     width: 100%;
     background-color: var(--red);
     padding-bottom: 40px;
-    z-index: -1;
     margin-top: auto;
 }
 
@@ -1316,12 +1315,30 @@ main {
 
 #footer-socials {
     margin-top: 15px;
+    width: 50%;
 }
 
 #footer-socials a {
     text-decoration: none;
     margin: 0px 20px;
     font-size: 1.3em;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.admin-link a {
+    text-decoration: none;
+    color: var(--lightred);
+    vertical-align: baseline;
+}
+
+.left-socials,
+.admin-link {
+    width: 25%;
+    margin-top: 15px;
 }
 
 .edit-socials-icon {

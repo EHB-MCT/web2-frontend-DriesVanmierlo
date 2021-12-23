@@ -369,7 +369,7 @@ window.onload = async function () {
                     .catch(error => {
                         alert("Something went wrong, code may exist already", error);
                     });
-            })
+            });
         }
     }
 
@@ -385,7 +385,7 @@ window.onload = async function () {
                 } else {
                     document.getElementById('login-password').type = "password";
                 }
-            })
+            });
 
             document.getElementById('register-form').addEventListener('submit', e => {
                 e.preventDefault();
