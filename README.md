@@ -10,6 +10,9 @@ password: AdminMike
 email: maaike.beuten@ehb.be
 password: AdminMaaike
 
+Wireframes: https://xd.adobe.com/view/dbb30b39-6b43-4f66-8415-78155806dc4b-8ee0/
+Design: https://xd.adobe.com/view/579cebc1-aa83-4f57-b308-a24daab137aa-02cf/
+
 Sources:
 - https://www.youtube.com/watch?v=JAFhwfyYEb4&ab_channel=MikeDerycke
 - https://www.youtube.com/watch?v=3Ykr6dZjXhE&t=1281s&ab_channel=MikeDerycke
