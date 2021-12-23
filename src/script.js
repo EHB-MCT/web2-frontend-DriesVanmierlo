@@ -378,6 +378,15 @@ window.onload = async function () {
             document.getElementById('login-admin').style.display = "none";
             document.getElementById('add-and-datalist').style.display = "flex";
         } else {
+            document.getElementById('register-form').addEventListener('change', e => {
+                e.preventDefault();
+                if (document.getElementById('show-password').checked) {
+                    document.getElementById('login-password').type = "text";
+                } else {
+                    document.getElementById('login-password').type = "password";
+                }
+            })
+
             document.getElementById('register-form').addEventListener('submit', e => {
                 e.preventDefault();
 
