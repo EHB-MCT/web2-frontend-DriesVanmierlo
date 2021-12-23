@@ -28,7 +28,6 @@ window.onload = async function () {
         if (document.getElementById('search-location-form')) {
             document.getElementById('search-location-form').addEventListener('submit', e => {
                 e.preventDefault();
-                console.log("LOCATION!");
                 if (document.getElementById('search-location-input').value != "") {
                     updateLocation(kapsalonList);
                 }
@@ -38,7 +37,6 @@ window.onload = async function () {
         if (document.getElementById('filter-type-form')) {
             document.getElementById('filter-type-form').addEventListener('change', e => {
                 e.preventDefault();
-                console.log("CHANGE!");
                 if (document.getElementById('search-location-input').value != "") {
                     updateLocation(kapsalonList);
                 } else {
@@ -50,7 +48,6 @@ window.onload = async function () {
         if (document.getElementById('filter-options-form')) {
             document.getElementById('filter-options-form').addEventListener('change', e => {
                 e.preventDefault();
-                console.log("CHANGE!");
                 if (document.getElementById('search-location-input').value != "") {
                     updateLocation(kapsalonList);
                 } else {
@@ -62,7 +59,6 @@ window.onload = async function () {
         if (document.getElementById('order-by-form')) {
             document.getElementById('order-by-form').addEventListener('change', e => {
                 e.preventDefault();
-                console.log("ORDER!")
                 if (document.getElementById('search-location-input').value != "") {
                     updateLocation(kapsalonList);
                 } else {
@@ -81,7 +77,6 @@ window.onload = async function () {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 kapsalonInfo = data;
             })
 
@@ -158,14 +153,12 @@ window.onload = async function () {
             document.getElementById('insert-code-form').addEventListener('submit', e => {
                 e.preventDefault('submit');
                 kapid = document.getElementById('insert-code-input').value;
-                console.log(kapid);
 
                 fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/?id=${kapid}`)
                     .then(response => {
                         return response.json();
                     })
                     .then(data => {
-                        console.log(data);
                         kapsalonId = data._id;
 
                         localStorage.setItem("kapsalonId", kapsalonId);
@@ -221,7 +214,6 @@ window.onload = async function () {
                 allRatings.push(newRating);
 
                 let newGeneralRating = calculateGeneralScoreNumber(kapsalonInfo.ratings);
-                console.log(newGeneralRating);
 
                 if (newGeneralRating == "no score yet") {
                     newGeneralRating = Math.round(((ratingFries + ratingMeat + ratingToppings) / 3 + Number.EPSILON) * 10) / 10;
@@ -231,8 +223,6 @@ window.onload = async function () {
                     "ratings": allRatings,
                     "latestGeneralRating": newGeneralRating
                 }
-
-                console.log("kap: ", kap);
 
                 fetch(`https://web2-kapsamazing-driesv.herokuapp.com/rateKapsalon/${localStorage.kapsalonId}`, {
                         method: "PUT",
@@ -245,7 +235,6 @@ window.onload = async function () {
                         res.json()
                     })
                     .then(data => {
-                        console.log(data);
                         if (data == undefined) {
                             alert("Thank you for your rating! Kapsalon-lovers will thank you!");
                             window.location.href = './index.html';
@@ -258,8 +247,6 @@ window.onload = async function () {
 
         if (document.getElementById('rate-form')) {
             document.getElementById('rate-form').addEventListener('change', e => {
-                console.log("Change");
-
                 document.getElementById('rate-overall-score').innerHTML = updateGeneralRating();
             });
         }
@@ -293,8 +280,6 @@ window.onload = async function () {
                 let newLatitude = document.getElementById('kapsalon-latitude').value;
                 let newLongitude = document.getElementById('kapsalon-longitude').value;
 
-                console.log(newDelivered);
-
                 let deliveredOptions = [];
 
                 if (newDelivered == "pickup-and-delivery") {
@@ -321,7 +306,6 @@ window.onload = async function () {
                     image: newImage,
                     link: newLink
                 }
-                console.log(kap);
 
                 fetch("https://web2-kapsamazing-driesv.herokuapp.com/saveKapsalon", {
                         method: "POST",
@@ -381,10 +365,8 @@ function renderKapsalonList(kapsalonList) {
         }
         document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
         document.getElementById('kapsalon-datalist').addEventListener('click', e => {
-            console.log("click on data list", e);
 
             const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
-            console.log(kapsalonId, e.target);
 
             if (kapsalonId) {
                 localStorage.setItem("kapsalonId", kapsalonId);
@@ -424,10 +406,8 @@ function renderKapsalonsAdmin(kapsalonList) {
         }
         document.getElementById('kapsalon-admin-list').innerHTML = kapsalonListAdminHTML;
         document.getElementById('kapsalon-admin-list').addEventListener('click', e => {
-            console.log("click on data list", e);
 
             const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
-            console.log(kapsalonId, e.target);
 
             if (kapsalonId) {
                 if (e.target.className == "icon-bin") {
@@ -439,7 +419,6 @@ function renderKapsalonsAdmin(kapsalonList) {
 }
 
 function deleteKapsalon(kapsalonId) {
-    console.log("delete kapsalon with id:", kapsalonId)
 
     fetch(`https://web2-kapsamazing-driesv.herokuapp.com/deleteKapsalon/${kapsalonId}`, {
             method: "DELETE",
@@ -451,7 +430,6 @@ function deleteKapsalon(kapsalonId) {
             return response.json()
         })
         .then(data => {
-            console.log('Challenge succesfully removed:', data);
             if (data) {
                 location.reload();
             }
@@ -536,14 +514,12 @@ function sortKapsalons(kapsalonList, orderBy) {
 }
 
 function filterKapsalonsRestaurant(kapsalonList, restaurant, city, currentKapsalon) {
-    console.log(kapsalonList);
     let newList = [];
     kapsalonList.forEach(e => {
         if (e.restaurant == restaurant && e.city == city && e._id != currentKapsalon) {
             newList.push(e);
         }
     })
-    console.log(newList);
     renderCommonRestaurant(newList);
 }
 
@@ -685,7 +661,6 @@ function calculateGeneralScoreNumber(ratings) {
 }
 
 function calculateIngredientScore(ingredient, ratings) {
-    console.log(ingredient, ratings)
     if (ratings.length > 0) {
         let ingredientScore = 0;
         let numberRatings = 0;

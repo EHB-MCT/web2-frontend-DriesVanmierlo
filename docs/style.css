@@ -252,6 +252,10 @@ body {
 /***     MAIN     ***/
 /********************/
 
+#index-main {
+    margin-top: 0;
+}
+
 main {
     width: 85%;
     margin: auto;
