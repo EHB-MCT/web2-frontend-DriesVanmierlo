@@ -666,11 +666,11 @@ function renderCommonRestaurant(kapsalonList) {
     //check if there are kapsalons available, otherwise create notification
     if (document.getElementById('other-meals-datalist')) {
         if (kapsalonListCommonHTML == "") {
-            kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No other kapsalons found.</div>`
+            kapsalonListCommonHTML = `<div class="no-kapsalons-message">No other kapsalons found.</div>`
         }
 
-        //when clicked on a kapsalon, get _id and save it in localstorage
         document.getElementById('other-meals-datalist').innerHTML = kapsalonListCommonHTML;
+        //when clicked on a kapsalon, get _id and save it in localstorage
         document.getElementById('other-meals-datalist').addEventListener('click', e => {
 
             const kapsalonId = e.target.closest('.datalist-kapsalon-article').id;
