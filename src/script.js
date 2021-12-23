@@ -5,6 +5,7 @@ const {
 
 window.onload = async function () {
 
+    //Check which page is loaded and only execute that code
     if (document.getElementById('kapsalon-datalist')) {
         await loadKapsalonsHomepage();
     }
@@ -24,16 +25,20 @@ window.onload = async function () {
     async function loadKapsalonsHomepage() {
         let kapsalonList = [];
 
+        //fetch all kapsalons
         await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
             .then(response => {
                 return response.json();
             })
             .then(data => {
                 kapsalonList = data;
+
+                //sort and render the kapsalons for the very first time on rating (default)
                 sortKapsalons(kapsalonList, "rating");
                 renderKapsalonList(kapsalonList);
             })
 
+        //if filters or searchfield changes, update the list
         if (document.getElementById('search-location-form')) {
             document.getElementById('search-location-form').addEventListener('submit', e => {
                 e.preventDefault();
@@ -80,6 +85,7 @@ window.onload = async function () {
     async function loadKapsalonInfo() {
         let kapsalonInfo;
 
+        //fetch kapsalon that has been selected in the list
         await fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/${localStorage.kapsalonId}`)
             .then(response => {
                 return response.json();
@@ -88,6 +94,7 @@ window.onload = async function () {
                 kapsalonInfo = data;
             })
 
+        //load content of that specific kapsalon
         if (document.getElementById('kapsalon-info-section')) {
             document.getElementById('kapsalon-info-section').innerHTML = `
                 <figure class="kapsalon-info-figure">
@@ -133,10 +140,12 @@ window.onload = async function () {
             </div>
                 `;
 
+            //adjust the rest of the page to the rest of the info
             document.getElementById('other-meals-title').innerHTML = `
                 Other meals from ${kapsalonInfo.restaurant}
                 `;
 
+            //fetch all other kapsalons of that restaurant
             fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
                 .then(response => {
                     return response.json();
@@ -147,7 +156,7 @@ window.onload = async function () {
                     renderKapsalonList(kapsalonList);
                 })
 
-
+            //show location of the restaurant of this kapsalon
             showLocation(kapsalonInfo);
         }
     }
@@ -162,6 +171,7 @@ window.onload = async function () {
                 e.preventDefault('submit');
                 kapid = document.getElementById('insert-code-input').value;
 
+                //fetch kapsalon with submitted kapid (6 digits) and save the _id in localstorage
                 fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/?id=${kapid}`)
                     .then(response => {
                         return response.json();
@@ -183,6 +193,7 @@ window.onload = async function () {
     async function rateKapsalon() {
         let kapsalonInfo;
 
+        //fetch the kapsalon saved in localstore
         await fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/${localStorage.kapsalonId}`)
             .then(response => {
                 return response.json();
@@ -193,45 +204,56 @@ window.onload = async function () {
 
         if (document.getElementById('rate-form')) {
 
+            //adjust page to this specific kapsalon
             document.getElementById("rate-title").innerHTML = `Rate "${kapsalonInfo.name}" from "${kapsalonInfo.restaurant}"`;
             document.getElementById("rate-kapsalon-figure").innerHTML = `<img class="kapsalon-info-img" src="${kapsalonInfo.image}" alt="Kapsalon from ${kapsalonInfo.restaurant}">`
 
+            //save rating
             document.getElementById('rate-form').addEventListener('submit', e => {
                 e.preventDefault();
 
+                //get values for each ingredient
                 let ratingFries = document.getElementById('range-fries').value;
                 let ratingMeat = document.getElementById('range-meat').value;
                 let ratingToppings = document.getElementById('range-toppings').value;
 
+                //correct the values to a point out of 5
                 ratingFries = parseInt(ratingFries) / 2;
                 ratingMeat = parseInt(ratingMeat) / 2;
                 ratingToppings = parseInt(ratingToppings) / 2;
 
                 let allRatings = [];
 
+                //save already existing ratings
                 kapsalonInfo.ratings.forEach(e => {
                     allRatings.push(e);
                 })
 
+                //create new rating format
                 let newRating = {
                     "fries": ratingFries,
                     "meat": ratingMeat,
                     "toppings": ratingToppings
                 }
 
+                //add new rating to all other ratings
                 allRatings.push(newRating);
 
+                //calculate the latest overall rating, so it shows up correctly in the list
                 let newGeneralRating = calculateGeneralScoreNumber(kapsalonInfo.ratings);
 
+                //if this new rating is the first ever rating, than calculate the total score
                 if (newGeneralRating == "no score yet") {
                     newGeneralRating = Math.round(((ratingFries + ratingMeat + ratingToppings) / 3 + Number.EPSILON) * 10) / 10;
                 }
 
+                //create object to adjust in the database
                 const kap = {
                     "ratings": allRatings,
                     "latestGeneralRating": newGeneralRating
                 }
 
+                //save the new rating
                 fetch(`https://web2-kapsamazing-driesv.herokuapp.com/rateKapsalon/${localStorage.kapsalonId}`, {
                         method: "PUT",
                         headers: {
@@ -253,6 +275,7 @@ window.onload = async function () {
 
         }
 
+        //if sliders change, calculate the general score of the rating
         if (document.getElementById('rate-form')) {
             document.getElementById('rate-form').addEventListener('change', e => {
                 document.getElementById('rate-overall-score').innerHTML = updateGeneralRating();
@@ -263,6 +286,7 @@ window.onload = async function () {
     async function loadKapsalonsAdmin() {
         let kapsalonList = [];
 
+        //fetch all kapsalons
         await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
             .then(response => {
                 return response.json();
@@ -276,6 +300,8 @@ window.onload = async function () {
             let addForm = document.getElementById('add-kapsalon-form');
             addForm.addEventListener('submit', e => {
                 e.preventDefault();
+
+                //if new kapsalon is submitted, get all values
                 let newKapid = document.getElementById('kapsalon-kapid').value;
                 let newName = document.getElementById('kapsalon-name').value;
                 let newRestaurant = document.getElementById('kapsalon-restaurant').value;
@@ -290,6 +316,7 @@ window.onload = async function () {
 
                 let deliveredOptions = [];
 
+                //create correct values for delivered options, so it works with the database
                 if (newDelivered == "pickup-and-delivery") {
                     deliveredOptions.push("pickup");
                     deliveredOptions.push("delivery")
@@ -299,6 +326,7 @@ window.onload = async function () {
                     deliveredOptions.push("delivery");
                 }
 
+                //create correct object to save in the database
                 const kap = {
                     kapid: newKapid,
                     name: newName,
@@ -315,6 +343,7 @@ window.onload = async function () {
                     link: newLink
                 }
 
+                //fetch the new kapsalon to the database
                 fetch("https://web2-kapsamazing-driesv.herokuapp.com/saveKapsalon", {
                         method: "POST",
                         headers: {
@@ -337,8 +366,7 @@ window.onload = async function () {
     }
 }
 
-//General functions
-
+//function to render all kapsalons in a format like on the homepage
 function renderKapsalonList(kapsalonList) {
     let kapsalonListHomepageHTML = "";
     kapsalonList.forEach(e => {
@@ -367,10 +395,13 @@ function renderKapsalonList(kapsalonList) {
             `
     });
 
+    //check if there are kapsalons available, otherwise create notification
     if (document.getElementById('kapsalon-datalist')) {
         if (kapsalonListHomepageHTML == "") {
             kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons found with your filters.</div>`;
         }
+
+        //when clicked on a kapsalon, get _id and save it in localstorage
         document.getElementById('kapsalon-datalist').innerHTML = kapsalonListHomepageHTML;
         document.getElementById('kapsalon-datalist').addEventListener('click', e => {
 
@@ -383,6 +414,7 @@ function renderKapsalonList(kapsalonList) {
     }
 }
 
+//function to render all kapsalons in a format like on the adminpage
 function renderKapsalonsAdmin(kapsalonList) {
     let kapsalonListAdminHTML = "";
     kapsalonList.forEach(e => {
@@ -408,10 +440,13 @@ function renderKapsalonsAdmin(kapsalonList) {
             `
     });
 
+    //check if there are kapsalons available, otherwise create notification
     if (document.getElementById('kapsalon-admin-list')) {
         if (kapsalonListAdminHTML == "") {
             kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No kapsalons added yet.</div>`
         }
+
+        //when clicked on a kapsalon trash icon, get _id and execute delete kapsalon function
         document.getElementById('kapsalon-admin-list').innerHTML = kapsalonListAdminHTML;
         document.getElementById('kapsalon-admin-list').addEventListener('click', e => {
 
@@ -426,8 +461,10 @@ function renderKapsalonsAdmin(kapsalonList) {
     }
 }
 
+//function to delete kapsalon
 function deleteKapsalon(kapsalonId) {
 
+    //fetch the deleted kapsalon
     fetch(`https://web2-kapsamazing-driesv.herokuapp.com/deleteKapsalon/${kapsalonId}`, {
             method: "DELETE",
             headers: {
@@ -444,14 +481,18 @@ function deleteKapsalon(kapsalonId) {
         })
 }
 
+//function to filter all kapsalons on location or restaurant
 function updateLocation(kapsalonList) {
     let newList = [];
 
+    //get input value
     let city = document.getElementById('search-location-input').value;
 
+    //make first character of inputed value capital
     city = city.charAt(0).toUpperCase() + city.slice(1);
     //Source: https://flexiple.com/javascript-capitalize-first-letter/
 
+    //check all kapsalons if value is used
     kapsalonList.forEach(e => {
         if (e.city.includes(city) || e.restaurant.includes(`${city}`)) {
             newList.push(e);
@@ -461,16 +502,18 @@ function updateLocation(kapsalonList) {
     updateList(newList);
 }
 
+//function to update all kapsalon list based on filter by type and delivered options
 function updateList(kapsalonList) {
     let newList = [];
 
+    //Source: https://stackoverflow.com/questions/48315428/how-to-make-a-filter-in-javascript-which-filters-div-by-checkboxes/48316156
     let kapsalons = document.querySelectorAll("#filter-type-form input[type='checkbox']");
     let options = document.querySelectorAll("#filter-options-form input[type='checkbox']");
     let orderBy = document.getElementById('order-by-input').value;
 
+    //check each checkbox if checked, than push all relevant kapsalons to new list
     kapsalons.forEach(e => {
         if (e.checked == true) {
-
             kapsalonList.forEach(el => {
                 if (e.name == el.type) {
                     newList.push(el);
@@ -479,8 +522,9 @@ function updateList(kapsalonList) {
         }
     })
 
-    let finalList = [];
+    let finalList = []; //i know, these lists are not named well
 
+    //check for each delivered option, if checkboxes are checked and push relevant kapsalons to final list
     if (options[0].checked == true && options[1].checked == true) {
         newList.forEach(e => {
             if (e.delivered.includes("pickup") || e.delivered.includes("delivery")) {
@@ -500,15 +544,17 @@ function updateList(kapsalonList) {
             }
         })
     } else {
+        //if nothing is selected, all kapsalons will be shown
         finalList = newList;
     }
 
+    //check other filter possibilities
     sortKapsalons(finalList, orderBy)
     renderKapsalonList(finalList);
 }
 
+//function to sort kapsalons by price or rating
 function sortKapsalons(kapsalonList, orderBy) {
-
 
     if (orderBy == "rating") {
         kapsalonList.sort((a, b) => {
@@ -521,9 +567,11 @@ function sortKapsalons(kapsalonList, orderBy) {
     }
 }
 
+//function to filter all other kapsalons of the restaurant of the selected kapsalon
 function filterKapsalonsRestaurant(kapsalonList, restaurant, city, currentKapsalon) {
     let newList = [];
     kapsalonList.forEach(e => {
+        //check both restaurant and city to prevent same named restaurants
         if (e.restaurant == restaurant && e.city == city && e._id != currentKapsalon) {
             newList.push(e);
         }
@@ -531,6 +579,7 @@ function filterKapsalonsRestaurant(kapsalonList, restaurant, city, currentKapsal
     renderCommonRestaurant(newList);
 }
 
+//function to render kapsalons of the same restaurant
 function renderCommonRestaurant(kapsalonList) {
     let kapsalonListCommonHTML = "";
     kapsalonList.forEach(e => {
@@ -559,10 +608,13 @@ function renderCommonRestaurant(kapsalonList) {
             `
     });
 
+    //check if there are kapsalons available, otherwise create notification
     if (document.getElementById('other-meals-datalist')) {
         if (kapsalonListCommonHTML == "") {
             kapsalonListHomepageHTML = `<div class="no-kapsalons-message">No other kapsalons found.</div>`
         }
+
+        //when clicked on a kapsalon, get _id and save it in localstorage
         document.getElementById('other-meals-datalist').innerHTML = kapsalonListCommonHTML;
         document.getElementById('other-meals-datalist').addEventListener('click', e => {
 
@@ -576,6 +628,7 @@ function renderCommonRestaurant(kapsalonList) {
     }
 }
 
+//function to calculate the general overall score of all existing ratings
 function calculateGeneralScore(ratings) {
     if (ratings.length > 0) {
 
@@ -604,6 +657,7 @@ function calculateGeneralScore(ratings) {
     }
 }
 
+//function to calculate how many stars must be shown
 function calculateStars(score) {
     let stars = "";
     let starEmpty = `<span class="icon-star-empty edit-star-icon"></span>`;
