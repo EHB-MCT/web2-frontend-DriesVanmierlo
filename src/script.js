@@ -5,14 +5,23 @@ const {
 
 window.onload = async function () {
 
-    await loadKapsalonsHomepage();
-    await loadKapsalonInfo();
-    await validateCode();
-    await rateKapsalon();
-    await loadKapsalonsAdmin();
+    if (document.getElementById('kapsalon-datalist')) {
+        await loadKapsalonsHomepage();
+    }
+    if (document.getElementById('kapsalon-info-section')) {
+        await loadKapsalonInfo();
+    }
+    if (document.getElementById('insert-code-container')) {
+        await validateCode();
+    }
+    if (document.getElementById('rate-form')) {
+        await rateKapsalon();
+    }
+    if (document.getElementById('kapsalon-admin-list')) {
+        await loadKapsalonsAdmin();
+    }
 
     async function loadKapsalonsHomepage() {
-
         let kapsalonList = [];
 
         await fetch('https://web2-kapsamazing-driesv.herokuapp.com/kapsalons')
@@ -69,7 +78,6 @@ window.onload = async function () {
     }
 
     async function loadKapsalonInfo() {
-
         let kapsalonInfo;
 
         await fetch(`https://web2-kapsamazing-driesv.herokuapp.com/kapsalon/${localStorage.kapsalonId}`)
