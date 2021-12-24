@@ -1,6 +1,9 @@
 If you want to navigate to the adminpage, where admins can add and delete kapsalons, in the bottom right corner of
 the footer you can find a button that leads to this page.
 
+Codepage:
+To rate a kapsalon, you can copy any code from the adminpage in order to rate that specific kapsalon. E.g. "123321" or "154899".
+
 Logins (only required to have access to adminpage for now):
 - Mike:
 email: mike.derycke@ehb.be
